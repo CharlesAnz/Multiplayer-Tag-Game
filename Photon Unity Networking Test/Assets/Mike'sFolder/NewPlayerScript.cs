@@ -10,6 +10,7 @@ public class NewPlayerScript : MonoBehaviour
     public float MovementSpeed = 2.0f;
     public float MaxSpeed = 0.2f;
     private float rotation = 0.0f;
+    private float acceleration = 0.0f;
     private bool controllable = true;
 
     /* PhotonView component */
@@ -38,18 +39,17 @@ public class NewPlayerScript : MonoBehaviour
             return;
         }
 
-        // only allow jumping if we are running.
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run") && Input.GetButtonDown("Fire2"))
-            animator.SetTrigger("Jump");
+        rotation = Input.GetAxis("Horizontal");
+        acceleration = Input.GetAxis("Vertical");
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        v = Mathf.Max(v, 0);    // prevent negative speed ("S" key)
-
-        animator.SetFloat("Speed", h * h + v * v);
-        animator.SetFloat("Direction", h, 0.25f, Time.deltaTime);
-
+        // TEST DEATH CODE
+        if(photonView.IsMine)
+        {
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                KillPlayer();
+            }
+        }
     }
 
     private IEnumerator WaitToBecomeGhost()
@@ -67,6 +67,18 @@ public class NewPlayerScript : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
+    }
+
+    [PunRPC]
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            if(photonView.IsMine)
+            {
+                KillPlayer();
+            }
+        }
     }
 
     [PunRPC]
