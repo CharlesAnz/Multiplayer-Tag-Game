@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitleScreenManager : MonoBehaviourPunCallbacks
 {
@@ -88,7 +89,13 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
+        transferData.MyMonsterName = MonsterPrefabs[CurrentMon].name;
+        transferData.MyMonsterMaterial = MaterialPrefabs[CurrentMat].name;
+        transferData.JoinRoomID = "New Room";
+        if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
+        else transferData.PlayerName = "No Name";
 
+        SceneManager.LoadScene("TestTagRoom");
     }
 
     public void ShowCustom()
@@ -99,11 +106,13 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom(int id)
     {
-        transferData.MyMonster = MonsterPrefabs[CurrentMon];
-        transferData.MyMaterial = MaterialPrefabs[CurrentMat];
+        transferData.MyMonsterName = MonsterPrefabs[CurrentMon].name;
+        transferData.MyMonsterMaterial = MaterialPrefabs[CurrentMat].name;
         transferData.JoinRoomID = LobbyCodes[id];
         if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
         else transferData.PlayerName = "No Name";
+
+        SceneManager.LoadScene("TestTagRoom");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

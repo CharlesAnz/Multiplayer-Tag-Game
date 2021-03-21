@@ -337,10 +337,10 @@ MonoBehaviour:
   - {fileID: 1561428196}
   MyMonster: {fileID: 1790203042416916}
   MonsterPrefabs:
-  - {fileID: 1790204633466062, guid: b8234fb24ad058442b85391987d48735, type: 3}
-  - {fileID: 1631417319351890, guid: 1c83c2db0efa5244199a5b921cc663c0, type: 3}
-  - {fileID: 1711228206799690, guid: dcda32f024ad4be4fac00e3568966e56, type: 3}
-  - {fileID: 1379597810144880, guid: 7dc613ee4e0c75b4ea8f2d2c508d7439, type: 3}
+  - {fileID: 583682356478220559, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
+  - {fileID: 1040773770827211161, guid: b9bf7a77c97a3b24f91ac9a4adcdad9c, type: 3}
+  - {fileID: 2871914618795776866, guid: 6941064540b2a374dad4b8376e830c84, type: 3}
+  - {fileID: 6859288582720430643, guid: 04df41e87f4e0144ca3740c1bb23eaf6, type: 3}
   MaterialPrefabs:
   - {fileID: 2100000, guid: 8d06ef433d7c35546890f0502b45353b, type: 2}
   - {fileID: 2100000, guid: 797934232287e6b429183d99cbae3ced, type: 2}
@@ -2042,8 +2042,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoinRoomID: 
   PlayerName: 
-  MyMonster: {fileID: 0}
-  MyMaterial: {fileID: 0}
+  MyMonsterName: 
+  MyMonsterMaterial: 
 --- !u!4 &721389563
 Transform:
   m_ObjectHideFlags: 0
@@ -5449,6 +5449,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6238670399394516267, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 581014539515884107, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
       propertyPath: m_RootOrder
       value: 6
