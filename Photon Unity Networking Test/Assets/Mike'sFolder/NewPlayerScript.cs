@@ -61,6 +61,14 @@ public class NewPlayerScript : MonoBehaviour
         photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
     }
 
+    private IEnumerator Cheer()
+    {
+        // INPUT CHEER LOGIC HERE
+        rigidbody.velocity = Vector3.zero;
+
+        yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
+    }
+
     [PunRPC]
     public void KillPlayer()
     {
@@ -83,8 +91,22 @@ public class NewPlayerScript : MonoBehaviour
     [PunRPC]
     public void BecomeGhost()
     {
+        /* Reenable renderer and set opacity to 50% */
         renderer.enabled = true;
+        //renderer.material.color.a = 0.5;
+
+        /* make it controllable again */
         controllable = true;
+
+        /* Stop the particle system */
         PlayerDeath.Stop();
+
+        if (photonView.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                StartCoroutine("Cheer");
+            }
+        }
     }
 }
