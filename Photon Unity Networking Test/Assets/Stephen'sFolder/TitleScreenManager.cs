@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class TitleScreenManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    public Button SearchLobbiesButton;
+    public Button FindLobbiesButton, CreateLobbyButton, CustomisationMenuButton;
     public GameObject MainMenu, LobbyMenu, CustomMenu;
-    public Text TestText, OutputColourText, OutputMonsterText;
+    public Text TestText, OutputColourText, OutputMonsterText, NicknameInputText;
+    public GameObject NoRoomsText;
 
     public GameObject[] LobbyUIS;
     string[] LobbyCodes;
@@ -85,16 +86,35 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
         CustomMenu.SetActive(false);
     }
 
+    public void CreateRoom()
+    {
+
+    }
+
+    public void ShowCustom()
+    {
+        LobbyMenu.SetActive(false);
+        CustomMenu.SetActive(true);
+    }
+
     public void JoinRoom(int id)
     {
         transferData.MyMonster = MonsterPrefabs[CurrentMon];
         transferData.MyMaterial = MaterialPrefabs[CurrentMat];
         transferData.JoinRoomID = LobbyCodes[id];
+        if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
+        else transferData.PlayerName = "No Name";
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
+
+        if (roomList.Count == 0)
+        {
+            NoRoomsText.SetActive(true);
+        }
+        else NoRoomsText.SetActive(false);
 
         LobbyCodes = new string[roomList.Count];
 

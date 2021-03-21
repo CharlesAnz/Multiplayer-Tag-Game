@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TransferData : MonoBehaviour
 {
-    public string JoinRoomID = "";
+    public string JoinRoomID = "", PlayerName = "";
     public GameObject MyMonster;
     public Material MyMaterial;
 
