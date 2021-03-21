@@ -90,7 +90,8 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         transferData.MyMonsterName = MonsterPrefabs[CurrentMon].name;
-        transferData.MyMonsterMaterial = MaterialPrefabs[CurrentMat].name;
+        //transferData.MyMaterial = MaterialPrefabs[CurrentMat];
+        transferData.MaterialID = CurrentMat;
         transferData.JoinRoomID = "New Room";
         if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
         else transferData.PlayerName = "No Name";
@@ -107,7 +108,8 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     public void JoinRoom(int id)
     {
         transferData.MyMonsterName = MonsterPrefabs[CurrentMon].name;
-        transferData.MyMonsterMaterial = MaterialPrefabs[CurrentMat].name;
+        //transferData.MyMaterial = MaterialPrefabs[CurrentMat];
+        transferData.MaterialID = CurrentMat;
         transferData.JoinRoomID = LobbyCodes[id];
         if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
         else transferData.PlayerName = "No Name";

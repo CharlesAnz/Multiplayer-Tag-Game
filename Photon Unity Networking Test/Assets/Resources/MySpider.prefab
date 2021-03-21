@@ -753,6 +753,7 @@ GameObject:
   - component: {fileID: -1685302733479177428}
   - component: {fileID: -4931608533723111063}
   - component: {fileID: -2152942073144367873}
+  - component: {fileID: 2132128360001283665}
   m_Layer: 0
   m_Name: MySpider
   m_TagString: Untagged
@@ -849,8 +850,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsRunning
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!114 &2132128360001283665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871914618795776866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee44a4b273a6c24597ccd856063e6a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MatPrefabs:
+  - {fileID: 2100000, guid: 8d06ef433d7c35546890f0502b45353b, type: 2}
+  - {fileID: 2100000, guid: 797934232287e6b429183d99cbae3ced, type: 2}
+  - {fileID: 2100000, guid: 98a94172eea4b8c4dbb1114bafe7814a, type: 2}
+  - {fileID: 2100000, guid: 7f336122ad7984948853076941abf85e, type: 2}
+  - {fileID: 2100000, guid: 990b374565f3f2c4d9e5c486f2f837ef, type: 2}
 --- !u!1 &2871926671560777592
 GameObject:
   m_ObjectHideFlags: 0

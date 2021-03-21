@@ -6,8 +6,9 @@ public class TransferData : MonoBehaviour
 {
     public string JoinRoomID = "", PlayerName = "";
     //public GameObject MyMonster;
-    public string MyMonsterName, MyMonsterMaterial;
+    public string MyMonsterName; //, MyMonsterMaterial;
     //public Material MyMaterial;
+    public int MaterialID;
 
     // Start is called before the first frame update
     void Start()
