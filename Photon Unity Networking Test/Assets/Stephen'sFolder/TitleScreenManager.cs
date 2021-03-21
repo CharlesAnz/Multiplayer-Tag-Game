@@ -13,6 +13,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     public Text TestText, OutputColourText, OutputMonsterText;
 
     public GameObject[] LobbyUIS;
+    string[] LobbyCodes;
 
     public GameObject MyMonster;
     public GameObject[] MonsterPrefabs;
@@ -20,6 +21,8 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     int CurrentMon = 0;
     int CurrentMat = 0;
     public GameObject SpawnPoint;
+
+    public TransferData transferData;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +60,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //Debug.Log("Yep, you managed to join a room!");
+        Debug.Log("Yep, you managed to join a room!");
         //status.text = "Yep, you managed to join a room!";
         //buttonPlay.gameObject.SetActive(false);
         //playerName.gameObject.SetActive(false);
@@ -82,22 +85,33 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
         CustomMenu.SetActive(false);
     }
 
+    public void JoinRoom(int id)
+    {
+        transferData.MyMonster = MonsterPrefabs[CurrentMon];
+        transferData.MyMaterial = MaterialPrefabs[CurrentMat];
+        transferData.JoinRoomID = LobbyCodes[id];
+    }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         base.OnRoomListUpdate(roomList);
+
+        LobbyCodes = new string[roomList.Count];
 
         foreach (GameObject lobby in LobbyUIS)
         {
             lobby.SetActive(false);
         }
 
-        string Output = "Y";
+        string Output = "";
         for (int i = 0; i < roomList.Count; i++)
         {
             RoomInfo room = roomList[i];
             Output += room.Name + ":" + room.PlayerCount + "\n";
             LobbyUIS[i].transform.Find("Text").GetComponent<Text>().text = room.Name.Substring(0, 5) + ": " + room.PlayerCount + "/" + room.MaxPlayers;
             LobbyUIS[i].SetActive(true);
+
+            LobbyCodes[i] = room.Name;
         }
         TestText.text = Output;
     }
@@ -134,6 +148,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
             default:
                 break;
         }
+        
         UpdateMaterial();
     }
 
@@ -179,5 +194,6 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
                 transform.GetComponent<SkinnedMeshRenderer>().material = MaterialPrefabs[CurrentMat];
             }
         }
+        
     }
 }
