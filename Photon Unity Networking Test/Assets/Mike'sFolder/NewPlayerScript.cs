@@ -70,11 +70,11 @@ public class NewPlayerScript : MonoBehaviour
     }
 
     [PunRPC]
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision otherPlayer)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (photonView.IsMine)
         {
-            if(photonView.IsMine)
+            if (otherPlayer.gameObject.CompareTag("Player"))
             {
                 KillPlayer();
             }
@@ -86,6 +86,7 @@ public class NewPlayerScript : MonoBehaviour
     {
         /* Disable relevant player elements */
         rigidbody.velocity = Vector3.zero;
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition;
         collider.enabled = false;
         renderer.enabled = false;
         controllable = false;

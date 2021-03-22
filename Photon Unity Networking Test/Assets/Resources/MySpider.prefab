@@ -755,6 +755,8 @@ GameObject:
   - component: {fileID: -2152942073144367873}
   - component: {fileID: 2132128360001283665}
   - component: {fileID: -193657079094433146}
+  - component: {fileID: -8754536078088803639}
+  - component: {fileID: 5551255208448449591}
   m_Layer: 0
   m_Name: MySpider
   m_TagString: Untagged
@@ -890,7 +892,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2
   turnSpeed: 180
+  controllable: 1
   PlayerDeath: {fileID: 7625572549289879959, guid: eb4ded1f88f4a164f97d5db554c6858f, type: 3}
+--- !u!54 &-8754536078088803639
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871914618795776866}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &5551255208448449591
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871914618795776866}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.36, y: 1, z: 1.49}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1 &2871926671560777592
 GameObject:
   m_ObjectHideFlags: 0
