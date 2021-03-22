@@ -90,6 +90,13 @@ public class NewPlayerScript : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints.FreezePosition;
         collider.enabled = false;
         //renderer.enabled = false;
+        foreach (Transform transform in gameObject.transform)
+        {
+            if (transform.gameObject.name != "Body")
+            {
+                transform.GetComponent<SkinnedMeshRenderer>().enabled = false;
+            }
+        }
         controllable = false;
 
         /* Play the particle system effect */
