@@ -20,6 +20,7 @@ public class NewPlayerScript : MonoBehaviour
     Animator animator;
     public ParticleSystem PlayerDeath;
 
+    public bool HasBeenSetup = false;
 
     public void Awake()
     {
@@ -72,7 +73,7 @@ public class NewPlayerScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision otherPlayer)
     {
-        if (photonView.IsMine)
+        if (HasBeenSetup && photonView.IsMine)
         {
             if (otherPlayer.gameObject.CompareTag("Player"))
             {
