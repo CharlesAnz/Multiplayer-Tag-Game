@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 683177460801923021}
   - component: {fileID: -724981334900836665}
   - component: {fileID: 2565630530078142891}
+  - component: {fileID: -1390705349730124731}
   m_Layer: 0
   m_Name: MyTurtle
   m_TagString: Untagged
@@ -615,6 +616,21 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 98a94172eea4b8c4dbb1114bafe7814a, type: 2}
   - {fileID: 2100000, guid: 7f336122ad7984948853076941abf85e, type: 2}
   - {fileID: 2100000, guid: 990b374565f3f2c4d9e5c486f2f837ef, type: 2}
+--- !u!114 &-1390705349730124731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040773770827211161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06fa937e95fc23048bfde60579713794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed: 2
+  turnSpeed: 180
+  PlayerDeath: {fileID: 7625572549289879959, guid: eb4ded1f88f4a164f97d5db554c6858f, type: 3}
 --- !u!1 &1040838536013606915
 GameObject:
   m_ObjectHideFlags: 0
