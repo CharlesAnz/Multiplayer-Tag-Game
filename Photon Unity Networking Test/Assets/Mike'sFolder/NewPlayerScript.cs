@@ -21,6 +21,7 @@ public class NewPlayerScript : MonoBehaviour
     public ParticleSystem PlayerDeath;
 
     public bool HasBeenSetup = false;
+    float SetupTime = 0, StartTime = 0;
 
     public void Awake()
     {
@@ -30,6 +31,8 @@ public class NewPlayerScript : MonoBehaviour
         collider = GetComponent<Collider>();
         //renderer = GetComponent<Renderer>();
         PlayerDeath = GetComponent<ParticleSystem>();
+
+        StartTime = Time.time;
     }
 
     public void Update()
@@ -38,6 +41,8 @@ public class NewPlayerScript : MonoBehaviour
         {
             return;
         }
+
+        if (Time.time - StartTime >= 10) HasBeenSetup = true;
 
         if(photonView.IsMine)
         {

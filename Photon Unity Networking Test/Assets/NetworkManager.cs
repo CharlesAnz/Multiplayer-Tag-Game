@@ -136,6 +136,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         player.GetComponent<SetupSkin>().SetMat(MatID);
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
 
-        player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
+        //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
     }
 }
