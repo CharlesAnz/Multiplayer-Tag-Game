@@ -6,11 +6,8 @@ using Photon.Pun;
 public class NewPlayerScript : MonoBehaviour
 {
     /* Player variables */
-    public float RotationSpeed = 90.0f;
-    public float MovementSpeed = 2.0f;
-    public float MaxSpeed = 0.2f;
-    private float rotation = 0.0f;
-    private float acceleration = 0.0f;
+    public float MovementSpeed = 2;
+    public float turnSpeed = 180;
     private bool controllable = true;
 
     /* PhotonView component */
@@ -39,13 +36,15 @@ public class NewPlayerScript : MonoBehaviour
             return;
         }
 
-        rotation = Input.GetAxis("Horizontal");
-        acceleration = Input.GetAxis("Vertical");
-
-        // TEST DEATH CODE
         if(photonView.IsMine)
         {
-            if(Input.GetKeyDown(KeyCode.T))
+            float forward = Input.GetAxis("Vertical");
+            float turn = Input.GetAxis("Horizontal");
+            transform.Translate(new Vector3(0, 0, forward * MovementSpeed * Time.deltaTime));
+            transform.Rotate(new Vector3(0, turn * turnSpeed * Time.deltaTime, 0));
+            Debug.Log("you should be moving!");
+            // TEST DEATH CODE
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 KillPlayer();
             }
