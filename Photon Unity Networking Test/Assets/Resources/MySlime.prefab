@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: -8543811472131356836}
   - component: {fileID: -1102249387957234644}
   - component: {fileID: 4778593037534525262}
+  - component: {fileID: 1544660320608247779}
   m_Layer: 0
   m_Name: MySlime
   m_TagString: Player
@@ -174,6 +175,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 6707233110688980372}
   - {fileID: 8966187268332789590}
+  - {fileID: 1544660320608247779}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5115,6 +5117,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1544660320608247779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583682356478220559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &583787836836160683
 GameObject:
   m_ObjectHideFlags: 0
