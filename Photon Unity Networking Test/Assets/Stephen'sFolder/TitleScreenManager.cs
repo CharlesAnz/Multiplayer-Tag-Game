@@ -15,7 +15,6 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     public GameObject NoRoomsText;
 
     public GameObject[] LobbyUIS;
-    //string[] LobbyCodes;
     List<RoomInfo> Rooms = new List<RoomInfo>();
 
     public GameObject MyMonster;
@@ -83,14 +82,6 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
     {
         base.OnRoomListUpdate(roomList);
 
-        if (Rooms.Count == 0)
-        {
-            NoRoomsText.SetActive(true);
-        }
-        else NoRoomsText.SetActive(false);
-
-        //LobbyCodes = new string[roomList.Count];
-
         foreach (GameObject lobby in LobbyUIS)
         {
             lobby.SetActive(false);
@@ -122,11 +113,14 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
                 LobbyUIS[i].transform.Find("Text").GetComponent<Text>().text = room.Name.Substring(0, 5) + ": " + room.PlayerCount + "/" + room.MaxPlayers;
                 LobbyUIS[i].SetActive(true);
             }
-            
-
-            //LobbyCodes[i] = room.Name;
         }
         TestText.text = Output;
+
+        if (Rooms.Count == 0)
+        {
+            NoRoomsText.SetActive(true);
+        }
+        else NoRoomsText.SetActive(false);
     }
 
     //Customisation
