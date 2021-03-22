@@ -21,6 +21,8 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     ChatNetworkManager chatNetworkManager;
     ChatClient chatClient;
 
+    public KylePlayerManager myKyle;
+
     public void Start()
     {
         chatNetworkManager = FindObjectOfType<ChatNetworkManager>();
@@ -43,12 +45,14 @@ public class ChatManager : MonoBehaviour, IChatClientListener
 		{
 		    this.SendChatMessage(this.InputFieldChat.text);
 			this.InputFieldChat.text = "";
-		}
+
+            myKyle.input = true;
+        }
 	}
 
     public void DisableInput()
     {
-
+        myKyle.input = false;
     }
 
     private void SendChatMessage(string inputLine)

@@ -10,14 +10,17 @@ public class KylePlayerManager : MonoBehaviourPun
 {
     Animator animator;
 
+    public bool input;
+
 	void Start () 
 	{
 	    animator = GetComponent<Animator>();
+        input = true;
 	}
 	        
 	void Update () 
 	{
-        if (photonView.IsMine)
+        if (photonView.IsMine && input)
         {
             // only allow jumping if we are running.
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run") && Input.GetButtonDown("Fire2"))
