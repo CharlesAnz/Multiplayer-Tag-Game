@@ -116,6 +116,14 @@ public class NewPlayerScript : MonoBehaviour
         //renderer.enabled = true;
         //renderer.material.color.a = 0.5;
 
+        foreach (Transform transform in gameObject.transform)
+        {
+            if (transform.gameObject.name != "Body")
+            {
+                transform.GetComponent<SkinnedMeshRenderer>().enabled = true;
+            }
+        }
+
         /* make it controllable again */
         controllable = true;
 
