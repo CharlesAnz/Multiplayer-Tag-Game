@@ -16,7 +16,7 @@ public class NewPlayerScript : MonoBehaviour
     /* Player components */
     private new Rigidbody rigidbody;
     private new Collider collider;
-    private new Renderer renderer;
+    //private new Renderer renderer;
     Animator animator;
     public ParticleSystem PlayerDeath;
 
@@ -27,7 +27,7 @@ public class NewPlayerScript : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
     }
 
     public void Update()
@@ -88,7 +88,7 @@ public class NewPlayerScript : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         rigidbody.constraints = RigidbodyConstraints.FreezePosition;
         collider.enabled = false;
-        renderer.enabled = false;
+        //renderer.enabled = false;
         controllable = false;
 
         /* Play the particle system effect */
@@ -105,7 +105,7 @@ public class NewPlayerScript : MonoBehaviour
     public void BecomeGhost()
     {
         /* Reenable renderer and set opacity to 50% */
-        renderer.enabled = true;
+        //renderer.enabled = true;
         //renderer.material.color.a = 0.5;
 
         /* make it controllable again */
