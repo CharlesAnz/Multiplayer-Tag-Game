@@ -19,6 +19,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public GameObject player;
 
+    TransferData transferData;
+    int MatID;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings();
+
+        transferData = FindObjectOfType<TransferData>();
+        PhotonNetwork.NickName = transferData.PlayerName;
+        if (transferData.JoinRoomID != "New Room") PhotonNetwork.JoinRoom(transferData.JoinRoomID);
+        else PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5 });
+        MatID = transferData.MaterialID;
     }
 
     public override void OnConnectedToMaster()
@@ -69,7 +78,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         buttonPlay.gameObject.SetActive(false);
         playerName.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(true);
-        PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
+        //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
+
+        BuildCharacter();
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
@@ -113,5 +124,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         else
             nickname.text = room.text = players.text = "";
+    }
+
+    void BuildCharacter()
+    {
+        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), 0);
+        player.GetComponent<SetupSkin>().SetMat(MatID);
     }
 }

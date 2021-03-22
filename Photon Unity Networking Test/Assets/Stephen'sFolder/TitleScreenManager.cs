@@ -96,7 +96,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
         if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
         else transferData.PlayerName = "No Name";
 
-        SceneManager.LoadScene("TestTagRoom");
+        SceneManager.LoadScene("MultiplayerScreen");
     }
 
     public void ShowCustom()
@@ -114,7 +114,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
         if (NicknameInputText.text != "") transferData.PlayerName = NicknameInputText.text;
         else transferData.PlayerName = "No Name";
 
-        SceneManager.LoadScene("TestTagRoom");
+        SceneManager.LoadScene("MultiplayerScreen");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
