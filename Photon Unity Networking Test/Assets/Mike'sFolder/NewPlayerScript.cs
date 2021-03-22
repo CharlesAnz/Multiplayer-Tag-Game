@@ -70,14 +70,13 @@ public class NewPlayerScript : MonoBehaviour
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
     }
 
-    [PunRPC]
     public void OnCollisionEnter(Collision otherPlayer)
     {
         if (photonView.IsMine)
         {
             if (otherPlayer.gameObject.CompareTag("Player"))
             {
-                KillPlayer();
+                photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
             }
         }
     }
