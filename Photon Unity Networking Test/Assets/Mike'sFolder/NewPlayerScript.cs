@@ -28,6 +28,7 @@ public class NewPlayerScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         //renderer = GetComponent<Renderer>();
+        PlayerDeath = GetComponent<ParticleSystem>();
     }
 
     public void Update()
