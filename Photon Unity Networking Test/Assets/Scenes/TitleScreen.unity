@@ -2043,7 +2043,7 @@ MonoBehaviour:
   JoinRoomID: 
   PlayerName: 
   MyMonsterName: 
-  MyMonsterMaterial: 
+  MaterialID: 0
 --- !u!4 &721389563
 Transform:
   m_ObjectHideFlags: 0
@@ -3036,7 +3036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286077105}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 512.084, y: 47.870907, z: 206.35909}
+  m_LocalPosition: {x: 511.51, y: 47.870907, z: 206.35909}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5459,7 +5459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 581014539515884107, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 512.084
+      value: 511.51
       objectReference: {fileID: 0}
     - target: {fileID: 581014539515884107, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
       propertyPath: m_LocalPosition.y
