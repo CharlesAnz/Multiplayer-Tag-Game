@@ -8,7 +8,7 @@ public class NewPlayerScript : MonoBehaviour
     /* Player variables */
     public float MovementSpeed = 2;
     public float turnSpeed = 180;
-    private bool controllable = true;
+    public bool controllable = true;
 
     /* PhotonView component */
     private PhotonView photonView;
@@ -19,6 +19,7 @@ public class NewPlayerScript : MonoBehaviour
     private new Renderer renderer;
     Animator animator;
     public ParticleSystem PlayerDeath;
+
 
     public void Awake()
     {

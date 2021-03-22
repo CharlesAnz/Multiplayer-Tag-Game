@@ -19,6 +19,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public GameObject player;
 
+    ChatManager chatManager;
+
     TransferData transferData;
     int MatID;
 
@@ -29,6 +31,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         buttonPlay.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(false);
         playerName.gameObject.SetActive(false);
+
+        chatManager = FindObjectOfType<ChatManager>();
 
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings();
@@ -79,7 +83,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerName.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(true);
         //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
-
+        chatManager.Connect(transferData.PlayerName);
         BuildCharacter();
     }
 
@@ -130,5 +134,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), 0);
         player.GetComponent<SetupSkin>().SetMat(MatID);
+        chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
+
+
     }
 }

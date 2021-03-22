@@ -75,10 +75,10 @@ public class ChatNetworkManager : MonoBehaviourPunCallbacks
         playerName.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(true);
         chatManager.UserName = PhotonNetwork.NickName;
-        chatManager.Connect();
+        chatManager.Connect("In Theory");
         KylePlayerManager myKyle = PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0).GetComponent<KylePlayerManager>();
 
-        chatManager.myKyle = myKyle;
+        //chatManager.myKyle = myKyle;
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)

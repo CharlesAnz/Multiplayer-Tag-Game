@@ -12,7 +12,7 @@ using AuthenticationValues = Photon.Chat.AuthenticationValues;
 public class ChatManager : MonoBehaviour, IChatClientListener
 {
     [SerializeField]
-    private Text nickname, status, room, players, chat, StateText;
+    private Text chat, StateText;
 
     public InputField InputFieldChat;
     public string UserName;
@@ -21,7 +21,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     ChatNetworkManager chatNetworkManager;
     ChatClient chatClient;
 
-    public KylePlayerManager myKyle;
+    public NewPlayerScript myCharacter;
 
     public void Start()
     {
@@ -46,27 +46,27 @@ public class ChatManager : MonoBehaviour, IChatClientListener
 		    this.SendChatMessage(this.InputFieldChat.text);
 			this.InputFieldChat.text = "";
 
-            myKyle.input = true;
+            myCharacter.controllable = true;
         }
 	}
 
     public void DisableInput()
     {
-        myKyle.input = false;
+        myCharacter.controllable = false;
     }
 
     private void SendChatMessage(string inputLine)
     {
         chatClient.PublishMessage("Public", inputLine);
     }
-    public void Connect()
+    public void Connect(string name)
     {
         this.chatClient = new ChatClient(this);
-        this.chatClient.AuthValues = new AuthenticationValues(this.UserName);
+        this.chatClient.AuthValues = new AuthenticationValues(name);
         this.chatClient.UseBackgroundWorkerForSending = true;
         this.chatClient.ConnectUsingSettings(this.chatAppSettings);
 
-        Debug.Log("Connecting as: " + this.UserName);
+        Debug.Log("Connecting as: " + name);
     }
 
     public void ShowChannel(string channelName)
