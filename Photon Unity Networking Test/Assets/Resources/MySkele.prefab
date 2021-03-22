@@ -910,6 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2
   turnSpeed: 180
+  controllable: 1
   PlayerDeath: {fileID: 7625572549289879959, guid: eb4ded1f88f4a164f97d5db554c6858f, type: 3}
 --- !u!1 &6859301459015477105
 GameObject:
