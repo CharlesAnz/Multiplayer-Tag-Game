@@ -134,7 +134,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void BuildCharacter()
     {
-        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), 0);
+        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0), 0);
         player.GetComponent<SetupSkin>().SetMat(MatID);
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
         MultiplayerManager.MyPlayer = player;
