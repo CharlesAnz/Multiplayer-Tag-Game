@@ -1497,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 219715446438112944, guid: 501541c40c47d544bb7b254e21c4750b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.312527
+      value: 46.46
       objectReference: {fileID: 0}
     - target: {fileID: 219715446438112944, guid: 501541c40c47d544bb7b254e21c4750b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5859,13 +5859,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Edited Scene 2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3263927126987615776, guid: 729a2778c4fe33e438da6c004f751187, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3263927126987615777, guid: 729a2778c4fe33e438da6c004f751187, type: 3}
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3263927126987615777, guid: 729a2778c4fe33e438da6c004f751187, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 84.111046
+      value: 84.258514
       objectReference: {fileID: 0}
     - target: {fileID: 3263927126987615777, guid: 729a2778c4fe33e438da6c004f751187, type: 3}
       propertyPath: m_LocalPosition.y
