@@ -33,12 +33,15 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
 
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings();
+
+        MainMenu.SetActive(false);
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("OnConnectedToMaster was called by PUN.");
         PhotonNetwork.JoinLobby();
+        MainMenu.SetActive(true);
     }
 
     public void RefreshLobbies()
