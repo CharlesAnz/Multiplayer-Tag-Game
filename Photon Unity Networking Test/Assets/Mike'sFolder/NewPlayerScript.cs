@@ -23,6 +23,8 @@ public class NewPlayerScript : MonoBehaviour
     float SetupTime = 0, StartTime = 0;
 
     public bool HasBomb = false;
+    GameObject LastHit;
+    float LastHitTime = 0f;
 
     public void Awake()
     {
@@ -44,6 +46,7 @@ public class NewPlayerScript : MonoBehaviour
         }
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
+        if (Time.time - LastHitTime >= 5) LastHit = null;
 
         if(photonView.IsMine)
         {
@@ -81,13 +84,15 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (HasBeenSetup && photonView.IsMine)
         {
-            if (otherPlayer.gameObject.CompareTag("Player"))
+            if (otherPlayer.gameObject.CompareTag("Player") && Vector3.Distance(FindObjectOfType<BombControl>().gameObject.transform.position, gameObject.transform.position) <= 10)
             {
+                LastHit = otherPlayer.gameObject;
+                //print("Collided!");
                 //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
                 if (HasBomb)
                 {
                     photonView.RPC("Collided", RpcTarget.MasterClient, otherPlayer.gameObject);
-                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer , otherPlayer.gameObject.GetComponent<PhotonView>().Owner.UserId);
+                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer);
                     HasBomb = false;
                 }
             }
@@ -154,13 +159,16 @@ public class NewPlayerScript : MonoBehaviour
     }
 
     [PunRPC]
-    public void SetHasBomb(string ID)
+    public void SetHasBomb()
     {
-        Debug.Log(ID + ":" + photonView.Owner.UserId);
+        //Debug.Log(ID + ":" + photonView.Owner.UserId);
         //print(ID + ":" + photonView.Owner.UserId);
-        if (photonView.Owner.UserId == ID)
+        //if (photonView.Owner.UserId == ID)
+        
+        if (LastHit && !HasBomb)
         {
             HasBomb = true;
+            print("SetBomb");
         }
         
     }
