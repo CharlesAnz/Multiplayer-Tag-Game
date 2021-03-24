@@ -87,7 +87,7 @@ public class NewPlayerScript : MonoBehaviour
                 if (HasBomb)
                 {
                     photonView.RPC("Collided", RpcTarget.MasterClient, otherPlayer.gameObject);
-                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer , otherPlayer.gameObject.GetPhotonView().Controller.UserId);
+                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer , otherPlayer.gameObject.GetComponent<PhotonView>().Owner.UserId);
                     HasBomb = false;
                 }
             }
