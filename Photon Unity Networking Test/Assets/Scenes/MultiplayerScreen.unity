@@ -739,6 +739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca52837d16c9d940950251f8bd3b62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameStarted: 0
+  StartTime: 0
+  TheBomb: {fileID: 0}
 --- !u!4 &555609264
 Transform:
   m_ObjectHideFlags: 0
