@@ -16,7 +16,6 @@ public class NewPlayerScript : MonoBehaviour
     /* Player components */
     private new Rigidbody rigidbody;
     private new Collider collider;
-    //private new Renderer renderer;
     Animator animator;
     public ParticleSystem PlayerDeath;
 
@@ -29,7 +28,6 @@ public class NewPlayerScript : MonoBehaviour
         photonView = GetComponent<PhotonView>();
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        //renderer = GetComponent<Renderer>();
         PlayerDeath = GetComponent<ParticleSystem>();
 
         StartTime = Time.time;
@@ -117,10 +115,6 @@ public class NewPlayerScript : MonoBehaviour
     [PunRPC]
     public void BecomeGhost()
     {
-        /* Reenable renderer and set opacity to 50% */
-        //renderer.enabled = true;
-        //renderer.material.color.a = 0.5;
-
         foreach (Transform transform in gameObject.transform)
         {
             if (transform.gameObject.name != "Body")
