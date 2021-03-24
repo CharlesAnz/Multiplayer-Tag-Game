@@ -12,6 +12,7 @@ public class MultiplayerGameManager : MonoBehaviourPun
     public bool GameStarted = false;
     public float StartTime = 0f;
     public GameObject TheBomb;
+    public GameObject MyPlayer;
 
     public void Start()
     {
@@ -20,23 +21,30 @@ public class MultiplayerGameManager : MonoBehaviourPun
 
     public void Update()
     {
-        if (!GameStarted)
+        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount >= 3)
+            if (!GameStarted)
             {
-                print("Game started");
-                StartTime = Time.time;
-                SetupGame();
-                
-                GameStarted = true;
+                if (PhotonNetwork.CurrentRoom.PlayerCount >= 3)
+                {
+                    print("Game started");
+                    StartTime = Time.time;
+                    SetupGame();
+
+                    GameStarted = true;
+                }
+            }
+            else
+            {
 
             }
         }
+        
     }
 
     void SetupGame()
     {
         TheBomb = PhotonNetwork.Instantiate("Bomb", new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
-        TheBomb.GetComponent<BombControl>().SetupBomb(StartTime);
+        TheBomb.GetComponent<BombControl>().SetupBomb(StartTime, MyPlayer);
     }
 }

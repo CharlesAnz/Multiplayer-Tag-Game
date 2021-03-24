@@ -20,6 +20,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject player;
 
     ChatManager chatManager;
+    MultiplayerGameManager MultiplayerManager;
 
     TransferData transferData;
     int MatID;
@@ -33,6 +34,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerName.gameObject.SetActive(false);
 
         chatManager = FindObjectOfType<ChatManager>();
+        MultiplayerManager = FindObjectOfType<MultiplayerGameManager>();
 
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings();
@@ -135,6 +137,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0), 0);
         player.GetComponent<SetupSkin>().SetMat(MatID);
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
+        MultiplayerManager.MyPlayer = player;
 
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
     }
