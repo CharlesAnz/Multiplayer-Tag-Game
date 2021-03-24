@@ -84,9 +84,10 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (HasBeenSetup && photonView.IsMine)
         {
-            if (otherPlayer.gameObject.CompareTag("Player") && Vector3.Distance(FindObjectOfType<BombControl>().gameObject.transform.position, gameObject.transform.position) <= 10)
+            if (otherPlayer.gameObject.CompareTag("Player") && Vector3.Distance(FindObjectOfType<BombControl>().gameObject.transform.position, gameObject.transform.position) <= 50)
             {
                 LastHit = otherPlayer.gameObject;
+                LastHitTime = Time.time;
                 //print("Collided!");
                 //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
                 if (HasBomb)
