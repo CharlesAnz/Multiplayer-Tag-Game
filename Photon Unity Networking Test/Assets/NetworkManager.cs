@@ -42,7 +42,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         transferData = FindObjectOfType<TransferData>();
         PhotonNetwork.NickName = transferData.PlayerName;
         if (transferData.JoinRoomID != "New Room") PhotonNetwork.JoinRoom(transferData.JoinRoomID);
-        else PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5 });
+        else PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5, PublishUserId = true });
         MatID = transferData.MaterialID;
     }
 

@@ -25,7 +25,7 @@ public class MultiplayerGameManager : MonoBehaviourPun
         {
             if (!GameStarted)
             {
-                if (PhotonNetwork.CurrentRoom.PlayerCount >= 3)
+                if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
                 {
                     print("Game started");
                     StartTime = Time.time;

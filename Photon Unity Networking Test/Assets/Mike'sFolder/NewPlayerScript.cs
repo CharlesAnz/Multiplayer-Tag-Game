@@ -33,7 +33,7 @@ public class NewPlayerScript : MonoBehaviour
         PlayerDeath = GetComponent<ParticleSystem>();
 
         StartTime = Time.time;
-        gameObject.tag = photonView.Owner.ActorNumber + "";
+        //gameObject.tag = photonView.Owner.ActorNumber + "";
     }
 
     public void Update()
@@ -87,7 +87,7 @@ public class NewPlayerScript : MonoBehaviour
                 if (HasBomb)
                 {
                     photonView.RPC("Collided", RpcTarget.MasterClient, otherPlayer.gameObject);
-                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer, otherPlayer.gameObject.tag);
+                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer , otherPlayer.gameObject.GetPhotonView().Controller.UserId);
                     HasBomb = false;
                 }
             }
@@ -154,9 +154,11 @@ public class NewPlayerScript : MonoBehaviour
     }
 
     [PunRPC]
-    public void SetHasBomb(string Num)
+    public void SetHasBomb(string ID)
     {
-        if (photonView.Owner.ActorNumber + "" == Num)
+        Debug.Log(ID + ":" + photonView.Owner.UserId);
+        //print(ID + ":" + photonView.Owner.UserId);
+        if (photonView.Owner.UserId == ID)
         {
             HasBomb = true;
         }
