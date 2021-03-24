@@ -109,8 +109,8 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     {
         if (state == ChatState.ConnectedToFrontEnd)
             this.StateText.text = "Connected to Public Channel";
-
-        this.StateText.text = state.ToString();
+        else
+            this.StateText.text = state.ToString();
 
        
     }
