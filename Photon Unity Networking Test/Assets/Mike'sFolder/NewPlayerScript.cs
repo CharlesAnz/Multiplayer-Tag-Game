@@ -131,6 +131,8 @@ public class NewPlayerScript : MonoBehaviour
     [PunRPC]
     public void BecomeGhost()
     {
+        //rigidbody.constraints = RigidbodyConstraints.None;
+
         foreach (Transform transform in gameObject.transform)
         {
             if (transform.gameObject.name != "Body")
