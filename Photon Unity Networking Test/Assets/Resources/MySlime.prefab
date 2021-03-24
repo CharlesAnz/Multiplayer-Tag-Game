@@ -251,6 +251,7 @@ MonoBehaviour:
   controllable: 1
   PlayerDeath: {fileID: 4778593037534525262}
   HasBeenSetup: 0
+  HasBomb: 0
 --- !u!54 &3421394543707207586
 Rigidbody:
   m_ObjectHideFlags: 0

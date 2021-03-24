@@ -34,11 +34,15 @@ public class BombControl : MonoBehaviourPun
         DisplayText.text = TimeLeft + "";
     }
 
-    [PunRPC]
     public void SetupBomb(float t, GameObject p)
     {
         StartTime = t;
         target = p;
         active = true;
+    }
+
+    public void Collided(GameObject op)
+    {
+        target = op;
     }
 }

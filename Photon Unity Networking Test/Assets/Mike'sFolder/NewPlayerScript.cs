@@ -22,6 +22,8 @@ public class NewPlayerScript : MonoBehaviour
     public bool HasBeenSetup = false;
     float SetupTime = 0, StartTime = 0;
 
+    public bool HasBomb = false;
+
     public void Awake()
     {
         /* Grab the following components */
@@ -31,6 +33,7 @@ public class NewPlayerScript : MonoBehaviour
         PlayerDeath = GetComponent<ParticleSystem>();
 
         StartTime = Time.time;
+        gameObject.tag = photonView.Owner.ActorNumber + "";
     }
 
     public void Update()
@@ -52,7 +55,7 @@ public class NewPlayerScript : MonoBehaviour
             // TEST DEATH CODE
             if (Input.GetKeyDown(KeyCode.T))
             {
-                KillPlayer();
+                photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
             }
         }
     }
@@ -80,7 +83,13 @@ public class NewPlayerScript : MonoBehaviour
         {
             if (otherPlayer.gameObject.CompareTag("Player"))
             {
-                photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
+                //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
+                if (HasBomb)
+                {
+                    photonView.RPC("Collided", RpcTarget.MasterClient, otherPlayer.gameObject);
+                    photonView.RPC("SetHasBomb", RpcTarget.AllViaServer, otherPlayer.gameObject.tag);
+                    HasBomb = false;
+                }
             }
         }
     }
@@ -136,5 +145,21 @@ public class NewPlayerScript : MonoBehaviour
                 StartCoroutine("Cheer");
             }
         }
+    }
+
+    [PunRPC]
+    public void Collided(GameObject op)
+    {
+        FindObjectOfType<BombControl>().Collided(op);
+    }
+
+    [PunRPC]
+    public void SetHasBomb(string Num)
+    {
+        if (photonView.Owner.ActorNumber + "" == Num)
+        {
+            HasBomb = true;
+        }
+        
     }
 }
