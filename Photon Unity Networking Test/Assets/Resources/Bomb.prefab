@@ -33,9 +33,9 @@ Transform:
   m_LocalPosition: {x: -0.030215112, y: 4.296014, z: -2.129572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2076993196474761154}
-  - {fileID: 387760376867061670}
   - {fileID: 2099279664679987699}
+  - {fileID: 387760376867061670}
+  - {fileID: 2076993196474761154}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2cc77a40fc6980449a1c0260da8632ac, type: 2}
+  - {fileID: 2100000, guid: 3f7e4dad93862f94f9e196f1cc7c616f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 2558476897065996444}
   - component: {fileID: 487283211316548519}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,11 +181,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925457284628094081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000000072643, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.018420406, y: 0.15646414, z: 0.018420406}
   m_Children: []
   m_Father: {fileID: 1058642821528742571}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6295118476179822744
 MeshFilter:
@@ -214,7 +214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e4ec108e8252b0e44a32d8ae959dfc39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,7 +282,7 @@ RectTransform:
   m_Children:
   - {fileID: 2417956232916850165}
   m_Father: {fileID: 1058642821528742571}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1320006812306741776}
   - component: {fileID: 7074257236310996985}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: BombTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -455,7 +455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8924554701634173041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000000005588, y: 0.439, z: 0}
+  m_LocalPosition: {x: 0, y: 0.439, z: 0}
   m_LocalScale: {x: 0.544084, y: 0.06270074, z: 0.544084}
   m_Children: []
   m_Father: {fileID: 1058642821528742571}
@@ -488,7 +488,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 60711ab79e2a51149af9f6ca813ba24e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
