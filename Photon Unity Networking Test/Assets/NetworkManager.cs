@@ -25,6 +25,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     TransferData transferData;
     int MatID;
 
+    public GameObject BombPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +89,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
         chatManager.Connect(transferData.PlayerName);
         BuildCharacter();
+        BombControl TheBomb = FindObjectOfType<BombControl>(); //Instantiate(BombPrefab);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            double time = PhotonNetwork.Time;
+            //TheBomb.BombHolderId = PhotonNetwork.LocalPlayer.ActorNumber;
+            photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
+
+            player.GetComponent<NewPlayerScript>().HasBomb = true;
+        }
+    }
+
+    [PunRPC]
+    void SetTimey(double TimeLeft, int target)
+    {
+        FindObjectOfType<BombControl>().settime(TimeLeft, target);
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
@@ -102,14 +119,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        // Stephen's code for seeing the list of names
-        //string NameString = "";
-        //Dictionary<int, Photon.Realtime.Player> mydict = PhotonNetwork.CurrentRoom.Players;
-        //foreach (var item in mydict)
-        //{
-        //    NameString += ": " + item.Value.NickName + "\n";
-        //}
-
         if (PhotonNetwork.InRoom)
         {
             nickname.text = "Hello, " + PhotonNetwork.NickName;
@@ -140,5 +149,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         MultiplayerManager.MyPlayer = player;
 
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
+    }
+
+    public void Collided(int TargetID)
+    {
+        photonView.RPC("UpdateAll", RpcTarget.All, TargetID);
+    }
+
+    [PunRPC]
+    void UpdateAll(int TargetID)
+    {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == TargetID)
+        {
+            player.GetComponent<NewPlayerScript>().HasBomb = true;
+        }
+        FindObjectOfType<BombControl>().BombHolderId = TargetID;
     }
 }

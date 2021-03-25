@@ -81,13 +81,15 @@ public class NewPlayerScript : MonoBehaviour
     {
         if (HasBeenSetup && photonView.IsMine)
         {
-            if (otherPlayer.gameObject.CompareTag("Player"))
+            if (otherPlayer.gameObject.CompareTag("Player") && otherPlayer.gameObject.GetComponent<NewPlayerScript>())
             { 
                 print("Collided!" + HasBomb);
                 //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
+                int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
                 if (HasBomb)
                 {
-                    photonView.RPC("Collided", RpcTarget.MasterClient, otherPlayer.gameObject);
+                    FindObjectOfType<NetworkManager>().Collided(TargetId);
+                    HasBomb = false;
                 }
             }
         }
@@ -146,13 +148,5 @@ public class NewPlayerScript : MonoBehaviour
                 StartCoroutine("Cheer");
             }
         }
-    }
-
-    [PunRPC]
-    public void Collided(GameObject op)
-    {
-        FindObjectOfType<BombControl>().Collided(op);
-        HasBomb = !HasBomb;
-        print("SetBomb");
     }
 }

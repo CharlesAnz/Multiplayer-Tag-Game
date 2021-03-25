@@ -11,42 +11,54 @@ public class MultiplayerGameManager : MonoBehaviourPun
 
     public bool GameStarted = false;
     public float StartTime = 0f;
+    public GameObject BombPrefab;
     public GameObject TheBomb;
     public GameObject MyPlayer;
 
     public void Start()
     {
-        
+
     }
 
     public void Update()
     {
-        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
-        {
-            if (!GameStarted)
-            {
-                if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-                {
-                    print("Game started");
-                    StartTime = Time.time;
-                    SetupGame();
+        //if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
+        //{
+        //    if (!GameStarted)
+        //    {
+        //        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        //        {
+        //            print("Game started");
+        //            StartTime = Time.time;
+        //            SetupGame();
 
-                    GameStarted = true;
-                }
-            }
-            else
-            {
+        //            GameStarted = true;
+        //        }
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
         
     }
 
-    void SetupGame()
+    public void SetupGame()
     {
-        TheBomb = PhotonNetwork.Instantiate("Bomb", new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
-        TheBomb.GetComponent<BombControl>().SetupBomb(StartTime, MyPlayer);
-        MyPlayer.GetComponent<NewPlayerScript>().HasBomb = true;
+        //TheBomb = PhotonNetwork.Instantiate("Bomb", new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
+        TheBomb = Instantiate(BombPrefab);
+        //foreach (NewPlayerScript item in FindObjectsOfType<NewPlayerScript>())
+        //{
+        //    Debug.Log(item.GetComponent<PhotonView>().OwnerActorNr + "/");
+        //}
+        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            print("IsMaster");
+            StartTime = Time.time;
+            TheBomb.GetComponent<BombControl>().SetupBomb(MyPlayer);
+            MyPlayer.GetComponent<NewPlayerScript>().HasBomb = true;
+        }
     }
 
     
