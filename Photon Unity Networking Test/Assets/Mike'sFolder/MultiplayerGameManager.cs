@@ -22,43 +22,7 @@ public class MultiplayerGameManager : MonoBehaviourPun
 
     public void Update()
     {
-        //if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
-        //{
-        //    if (!GameStarted)
-        //    {
-        //        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-        //        {
-        //            print("Game started");
-        //            StartTime = Time.time;
-        //            SetupGame();
-
-        //            GameStarted = true;
-        //        }
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
         
-    }
-
-    public void SetupGame()
-    {
-        //TheBomb = PhotonNetwork.Instantiate("Bomb", new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
-        TheBomb = Instantiate(BombPrefab);
-        //foreach (NewPlayerScript item in FindObjectsOfType<NewPlayerScript>())
-        //{
-        //    Debug.Log(item.GetComponent<PhotonView>().OwnerActorNr + "/");
-        //}
-        
-        if (PhotonNetwork.IsMasterClient)
-        {
-            print("IsMaster");
-            StartTime = Time.time;
-            TheBomb.GetComponent<BombControl>().SetupBomb(MyPlayer);
-            MyPlayer.GetComponent<NewPlayerScript>().HasBomb = true;
-        }
     }
 
     
