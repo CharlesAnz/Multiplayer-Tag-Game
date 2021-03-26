@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private byte maxPlayersPerRoom = 4;
 
-    public GameObject player;
+    public GameObject player = null;
 
     ChatManager chatManager;
     MultiplayerGameManager MultiplayerManager;
@@ -90,10 +90,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
         chatManager.Connect(transferData.PlayerName);
         
+        StartCoroutine(BuildTimer());
         BombControl TheBomb = FindObjectOfType<BombControl>(); //Instantiate(BombPrefab);
         if (PhotonNetwork.IsMasterClient)
         {
-            BuildCharacter();
+            
             double time = PhotonNetwork.Time;
             //TheBomb.BombHolderId = PhotonNetwork.LocalPlayer.ActorNumber;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
@@ -101,6 +102,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             //player.GetComponent<NewPlayerScript>().HasBomb = true;
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
+    }
+
+    private IEnumerator BuildTimer()
+    {
+        /* get timer from MultiplayerGameManager */
+        yield return new WaitForSeconds(2);
+
+        BuildCharacter();
     }
 
     [PunRPC]
@@ -146,14 +155,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void BuildCharacter()
     {
-        if (!player)
-        {
-            player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
-            player.GetComponent<SetupSkin>().SetMat(MatID);
-            chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
-            MultiplayerManager.MyPlayer = player;
-        }
-        
+        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
+        player.GetComponent<SetupSkin>().SetMat(MatID);
+        chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
+        MultiplayerManager.MyPlayer = player;
 
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
     }
