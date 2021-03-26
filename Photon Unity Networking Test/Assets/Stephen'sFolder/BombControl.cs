@@ -25,13 +25,20 @@ public class BombControl : MonoBehaviourPun
     {
         if (active)
         {
-            DisplayText.text = ((int)(PhotonNetwork.Time - StartTime) + "");
+            int Num = (int)(PhotonNetwork.Time - StartTime);
+            DisplayText.text = (Num + "");
             if (target)
             {
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
+                if (Num == 20 && PhotonNetwork.IsMasterClient)
+                {
+                    target.GetComponent<NewPlayerScript>().CallKillMe();
+                    StartTime += 20;
+                    FindObjectOfType<NetworkManager>().BombExploded(StartTime);
+                }
             }
 
-            if (Time.time - delaytime >= 5)
+            if (Time.time - delaytime >= 0.5f)
             {
                 foreach (NewPlayerScript item in FindObjectsOfType<NewPlayerScript>())
                 {
