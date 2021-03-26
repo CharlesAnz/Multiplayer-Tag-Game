@@ -7735,6 +7735,10 @@ MonoBehaviour:
   SpawnPoints:
   - {fileID: 989257700}
   - {fileID: 1171771918}
+  - {fileID: 165458720}
+  - {fileID: 444993998}
+  - {fileID: 701127743}
+  - {fileID: 215825830}
 --- !u!4 &1923660188
 Transform:
   m_ObjectHideFlags: 0

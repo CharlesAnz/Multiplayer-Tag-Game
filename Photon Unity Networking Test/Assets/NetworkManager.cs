@@ -107,7 +107,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private IEnumerator BuildTimer()
     {
         /* get timer from MultiplayerGameManager */
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         BuildCharacter();
     }
