@@ -9,7 +9,7 @@ public class NewPlayerScript : MonoBehaviour
     public float MovementSpeed = 2;
     public float turnSpeed = 180;
     public bool controllable = true;
-    public bool movementSpeedBuff = false;
+    //public bool movementSpeedBuff = false;
 
     /* PhotonView component */
     private PhotonView photonView;
@@ -51,16 +51,20 @@ public class NewPlayerScript : MonoBehaviour
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
 
-        if (movementSpeedBuff)
-        {
-            if (Time.time - speedBoostStartTime >= 10)
+        //if (movementSpeedBuff)
+        //{
+            if (Time.time - speedBoostStartTime <= 10)
             { 
-                movementSpeedBuff = false;
+                //movementSpeedBuff = false;
+                MovementSpeed = 5;
+            }
+            else
+            {
                 MovementSpeed = 2;
             }
 
-            MovementSpeed = 5;
-        }
+            
+        //}
 
         if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
 
@@ -214,7 +218,7 @@ public class NewPlayerScript : MonoBehaviour
 
         if (cheerBoost.playerNearby)
         {
-            cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().movementSpeedBuff = true;
+            //cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().movementSpeedBuff = true;
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
 
         }
