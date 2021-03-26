@@ -60,6 +60,14 @@ public class NewPlayerScript : MonoBehaviour
             {
                 photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
             }
+
+            if (photonView.IsMine && IsGhost == true)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    StartCoroutine("Cheer");
+                }
+            }
         }
     }
 
@@ -137,14 +145,6 @@ public class NewPlayerScript : MonoBehaviour
 
         /* Stop the particle system */
         PlayerDeath.Stop();
-
-        if (photonView.IsMine)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartCoroutine("Cheer");
-            }
-        }
     }
 
     public IEnumerator GiveBomb()

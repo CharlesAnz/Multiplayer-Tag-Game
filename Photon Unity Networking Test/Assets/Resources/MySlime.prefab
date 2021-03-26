@@ -214,7 +214,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsRunning
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isCheering
   m_SynchronizeLayers:
   - SynchronizeType: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   PlayerDeath: {fileID: 4778593037534525262}
   HasBeenSetup: 0
   HasBomb: 1
-  CanGiveBomb: 1
+  CanGiveBomb: 0
   IsGhost: 0
 --- !u!54 &3421394543707207586
 Rigidbody:
