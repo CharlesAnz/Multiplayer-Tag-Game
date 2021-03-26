@@ -19,6 +19,7 @@ public class NewPlayerScript : MonoBehaviour
     Animator animator;
     public ParticleSystem PlayerDeath;
     public GameObject MyCam;
+    private BombCollisionTrigger bombCollisionTrigger;
 
     public bool HasBeenSetup = false;
     float StartTime = 0;
@@ -32,6 +33,8 @@ public class NewPlayerScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         PlayerDeath = GetComponent<ParticleSystem>();
+
+        bombCollisionTrigger = GetComponentInChildren<BombCollisionTrigger>();
 
         StartTime = Time.time;
     }
@@ -70,28 +73,36 @@ public class NewPlayerScript : MonoBehaviour
                     StartCoroutine(CheerTimer());
                 }
             }
+
+            if (bombCollisionTrigger.collidedWithPlayer)
+            {
+                Collided(bombCollisionTrigger.otherPlayer);
+            }
+
+
         }
     }
 
-    public void OnCollisionEnter(Collision otherPlayer)
+   
+    public void Collided(GameObject otherPlayer)
     {
         if (HasBeenSetup && photonView.IsMine)
         {
-            if (otherPlayer.gameObject.CompareTag("Player") && otherPlayer.gameObject.GetComponent<NewPlayerScript>())
-            { 
-                print("Collided!" + HasBomb);
-                //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
-                int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
-                if (HasBomb && CanGiveBomb && !IsGhost)
-                {
-                    
-                    HasBomb = false;
-                    CanGiveBomb = false;
-                    FindObjectOfType<NetworkManager>().Collided(TargetId);
-                }
+            print("Collided!" + HasBomb);
+            //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
+            int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
+            if (HasBomb && CanGiveBomb && !IsGhost)
+            {
+                HasBomb = false;
+                CanGiveBomb = false;
+                FindObjectOfType<NetworkManager>().Collided(TargetId);
             }
         }
+
+        bombCollisionTrigger.otherPlayer = null;
+        bombCollisionTrigger.collidedWithPlayer = false;
     }
+
 
     public void CallKillMe()
     {

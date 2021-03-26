@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5229230597320391891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6834822598769694224}
+  - component: {fileID: 2954409216352722512}
+  - component: {fileID: 8852449254156317868}
+  m_Layer: 0
+  m_Name: BombCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6834822598769694224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229230597320391891}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6855854499081158909}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2954409216352722512
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229230597320391891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2080715, y: 2.1371355, z: 2.0958176}
+  m_Center: {x: 0.0022500753, y: 0.56856775, z: -0.253366}
+--- !u!114 &8852449254156317868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229230597320391891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a668ecfc5ab3414e94b119f94ef50c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collidedWithPlayer: 0
+  otherPlayer: {fileID: 0}
 --- !u!1 &6858984872531379803
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +859,7 @@ Transform:
   - {fileID: 6862276369194600877}
   - {fileID: 6861957598742977359}
   - {fileID: 6861966692528427473}
+  - {fileID: 6834822598769694224}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -953,8 +1013,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.18, y: 1.9, z: 1.24}
-  m_Center: {x: 0, y: 0.93, z: 0.18}
+  m_Size: {x: 1.3632094, y: 1.8188859, z: 1.2457896}
+  m_Center: {x: -0.004983008, y: 0.889443, z: 0.33246523}
 --- !u!199 &3968257588918178143
 ParticleSystemRenderer:
   serializedVersion: 6
