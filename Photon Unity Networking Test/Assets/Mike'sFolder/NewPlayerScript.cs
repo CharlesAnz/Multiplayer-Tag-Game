@@ -139,7 +139,7 @@ public class NewPlayerScript : MonoBehaviour
 
         if (photonView.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 StartCoroutine("Cheer");
             }
@@ -168,7 +168,10 @@ public class NewPlayerScript : MonoBehaviour
     {
         // INPUT CHEER LOGIC HERE
         rigidbody.velocity = Vector3.zero;
+        controllable = false;
+
 
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
+        controllable = true;
     }
 }
