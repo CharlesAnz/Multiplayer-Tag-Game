@@ -116,6 +116,8 @@ public class NewPlayerScript : MonoBehaviour
     [PunRPC]
     public void KillPlayer()
     {
+        IsGhost = true;
+
         /* Disable relevant player elements */
         rigidbody.velocity = Vector3.zero;
         rigidbody.constraints = RigidbodyConstraints.FreezePosition;
@@ -156,7 +158,7 @@ public class NewPlayerScript : MonoBehaviour
         /* make it controllable again */
         controllable = true;
         //collider.enabled = true; //temp
-        IsGhost = true;
+        
 
         /* Stop the particle system */
         PlayerDeath.Stop();
