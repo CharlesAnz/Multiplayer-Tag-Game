@@ -26,12 +26,12 @@ public class BombControl : MonoBehaviourPun
         if (active)
         {
             int Num = (int)(PhotonNetwork.Time - StartTime);
-            DisplayText.text = ((20 - Num) + "");
+            DisplayText.text = ((40 - Num) + "");
             if (target)
             {
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
             }
-            if (Num >= 20 && PhotonNetwork.IsMasterClient)
+            if (Num >= 40 && PhotonNetwork.IsMasterClient)
             {
                 if (target)
                 {
