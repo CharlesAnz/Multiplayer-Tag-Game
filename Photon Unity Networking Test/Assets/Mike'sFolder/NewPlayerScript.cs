@@ -173,11 +173,10 @@ public class NewPlayerScript : MonoBehaviour
 
     public IEnumerator GiveBomb()
     {
-        HasBomb = true;
         CanGiveBomb = false;
+        HasBomb = true;
         yield return new WaitForSeconds(3);
         CanGiveBomb = true;
-        //HasBomb = true;
     }
 
     private IEnumerator WaitToBecomeGhost()

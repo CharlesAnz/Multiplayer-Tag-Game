@@ -203,11 +203,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void UpdateAll(int TargetID)
     {
+        FindObjectOfType<BombControl>().BombHolderId = TargetID;
         if (PhotonNetwork.LocalPlayer.ActorNumber == TargetID)
         {
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
-        FindObjectOfType<BombControl>().BombHolderId = TargetID;
+        
     }
 
     public void BombExploded(double t)
