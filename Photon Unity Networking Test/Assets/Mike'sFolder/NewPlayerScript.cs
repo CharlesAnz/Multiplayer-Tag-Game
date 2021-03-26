@@ -51,6 +51,8 @@ public class NewPlayerScript : MonoBehaviour
             float turn = Input.GetAxis("Horizontal");
             transform.Translate(new Vector3(0, 0, forward * MovementSpeed * Time.deltaTime));
             transform.Rotate(new Vector3(0, turn * turnSpeed * Time.deltaTime, 0));
+            if (forward != 0) GetComponent<Animator>().SetBool("IsRunning", true);
+            else GetComponent<Animator>().SetBool("IsRunning", false);
             //Debug.Log("you should be moving!");
             // TEST DEATH CODE
             if (Input.GetKeyDown(KeyCode.T))
