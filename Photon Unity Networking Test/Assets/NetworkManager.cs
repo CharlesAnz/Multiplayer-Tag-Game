@@ -159,9 +159,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         foreach (GameObject spawn in SpawnPoints)
         {
             bool IsClose = false;
+            print("Num of players is: " + FindObjectsOfType<NewPlayerScript>().Length);
             foreach (NewPlayerScript player in FindObjectsOfType<NewPlayerScript>())
             {
-                if (Vector3.Distance(player.gameObject.transform.position, spawn.transform.position) <= 10)
+                if (Vector3.Distance(player.gameObject.transform.position, spawn.transform.position) <= 20)
                 {
                     IsClose = true;
                 }
