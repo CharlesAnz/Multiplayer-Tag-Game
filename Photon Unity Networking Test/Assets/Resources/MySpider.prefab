@@ -900,6 +900,8 @@ MonoBehaviour:
   PlayerDeath: {fileID: 8940388497560603345}
   HasBeenSetup: 0
   HasBomb: 0
+  CanGiveBomb: 0
+  IsGhost: 0
 --- !u!54 &-8754536078088803639
 Rigidbody:
   m_ObjectHideFlags: 0
