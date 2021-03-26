@@ -22,7 +22,7 @@ public class NewPlayerScript : MonoBehaviour
     public bool HasBeenSetup = false;
     float SetupTime = 0, StartTime = 0;
 
-    public bool HasBomb = false, CanGiveBomb = false;
+    public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
 
     public void Awake()
     {
@@ -88,7 +88,7 @@ public class NewPlayerScript : MonoBehaviour
                 print("Collided!" + HasBomb);
                 //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
                 int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
-                if (HasBomb && CanGiveBomb)
+                if (HasBomb && CanGiveBomb && !IsGhost)
                 {
                     
                     HasBomb = false;
@@ -155,7 +155,8 @@ public class NewPlayerScript : MonoBehaviour
 
         /* make it controllable again */
         controllable = true;
-        collider.enabled = true; //temp
+        //collider.enabled = true; //temp
+        IsGhost = true;
 
         /* Stop the particle system */
         PlayerDeath.Stop();

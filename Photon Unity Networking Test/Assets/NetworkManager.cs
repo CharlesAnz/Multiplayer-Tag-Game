@@ -96,7 +96,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             
             double time = PhotonNetwork.Time;
-            //TheBomb.BombHolderId = PhotonNetwork.LocalPlayer.ActorNumber;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
 
             //player.GetComponent<NewPlayerScript>().HasBomb = true;
@@ -201,7 +200,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber == TargetID)
         {
-            //player.GetComponent<NewPlayerScript>().HasBomb = true;
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
         FindObjectOfType<BombControl>().BombHolderId = TargetID;
@@ -209,6 +207,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void BombExploded(double t)
     {
-        photonView.RPC("SetTimey", RpcTarget.AllBuffered, t, PhotonNetwork.LocalPlayer.ActorNumber);
+        List<NewPlayerScript> PList = new List<NewPlayerScript>();
+        foreach (NewPlayerScript playerScript in FindObjectsOfType<NewPlayerScript>())
+        {
+            if (!playerScript.IsGhost)
+            {
+                PList.Add(playerScript);
+            }
+        }
+        if (PList.Count > 0)
+        {
+            int random = Random.Range(0, PList.Count);
+            int AN = PList[random].gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
+            photonView.RPC("SetTimey", RpcTarget.AllBuffered, t, AN);
+        }
+        else
+        {
+            photonView.RPC("SetTimey", RpcTarget.AllBuffered, t, PhotonNetwork.LocalPlayer.ActorNumber);
+        }
+        
     }
 }

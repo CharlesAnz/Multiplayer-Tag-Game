@@ -57,7 +57,6 @@ public class BombControl : MonoBehaviourPun
 
     public void settime(double t, int id)
     {
-        //photonView.RPC("SetTime", RpcTarget.AllViaServer, t);
         StartTime = t;
         BombHolderId = id;
         active = true;
