@@ -88,20 +88,21 @@ public class NewPlayerScript : MonoBehaviour
     }
 
 
-
-
     public void OnCollisionEnter(Collision otherPlayer)
     {
-        if (HasBeenSetup && photonView.IsMine)
+        if (otherPlayer.gameObject.CompareTag("Player") && otherPlayer.gameObject.GetComponent<NewPlayerScript>())
         {
-            print("Collided!" + HasBomb);
-            //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
-            int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
-            if (HasBomb && CanGiveBomb && !IsGhost)
+            if (HasBeenSetup && photonView.IsMine)
             {
-                HasBomb = false;
-                CanGiveBomb = false;
-                FindObjectOfType<NetworkManager>().Collided(TargetId);
+                print("Collided!" + HasBomb);
+                //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
+                int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
+                if (HasBomb && CanGiveBomb && !IsGhost)
+                {
+                    HasBomb = false;
+                    CanGiveBomb = false;
+                    FindObjectOfType<NetworkManager>().Collided(TargetId);
+                }
             }
         }
     }
