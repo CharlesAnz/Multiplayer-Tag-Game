@@ -7732,6 +7732,9 @@ MonoBehaviour:
   maxPlayersPerRoom: 4
   player: {fileID: 583682356478220559, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
   BombPrefab: {fileID: 1540920966020812404, guid: d7abbb31887c5184cbd067242db027df, type: 3}
+  SpawnPoints:
+  - {fileID: 989257700}
+  - {fileID: 1171771918}
 --- !u!4 &1923660188
 Transform:
   m_ObjectHideFlags: 0

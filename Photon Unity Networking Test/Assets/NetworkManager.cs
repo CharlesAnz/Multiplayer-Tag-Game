@@ -26,6 +26,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     int MatID;
 
     public GameObject BombPrefab;
+    public GameObject[] SpawnPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -144,12 +145,37 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void BuildCharacter()
     {
-        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, new Vector3(0, 10, 0), Quaternion.Euler(0, 0, 0), 0);
+        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
         player.GetComponent<SetupSkin>().SetMat(MatID);
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
         MultiplayerManager.MyPlayer = player;
 
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
+    }
+
+    GameObject GetSpawn()
+    {
+        List<GameObject> CanGoSpawns = new List<GameObject>();
+        foreach (GameObject spawn in SpawnPoints)
+        {
+            foreach (NewPlayerScript player in FindObjectsOfType<NewPlayerScript>())
+            {
+                if (Vector3.Distance(player.gameObject.transform.position, spawn.transform.position) >= 10)
+                {
+                    CanGoSpawns.Add(spawn);
+                }
+            }
+        }
+        if (CanGoSpawns.Count > 0)
+        {
+            int random = Random.Range(0, CanGoSpawns.Count);
+            return CanGoSpawns[random];
+        }
+        else
+        {
+            print("All spawns covered");
+            return SpawnPoints[0];
+        }
     }
 
     public void Collided(int TargetID)
