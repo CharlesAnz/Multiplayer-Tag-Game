@@ -38,6 +38,11 @@ public class NewPlayerScript : MonoBehaviour
 
     public void Update()
     {
+        if (!photonView.IsMine)
+        {
+            FindObjectOfType<NetworkManager>().BuildCharacter();
+        }
+
         if (!photonView.IsMine || !controllable)
         {
             return;

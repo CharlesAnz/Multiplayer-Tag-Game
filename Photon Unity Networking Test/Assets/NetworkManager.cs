@@ -89,10 +89,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         buttonLeave.gameObject.SetActive(true);
         //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
         chatManager.Connect(transferData.PlayerName);
-        BuildCharacter();
+        
         BombControl TheBomb = FindObjectOfType<BombControl>(); //Instantiate(BombPrefab);
         if (PhotonNetwork.IsMasterClient)
         {
+            BuildCharacter();
             double time = PhotonNetwork.Time;
             //TheBomb.BombHolderId = PhotonNetwork.LocalPlayer.ActorNumber;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
@@ -143,12 +144,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             nickname.text = room.text = players.text = "";
     }
 
-    void BuildCharacter()
+    public void BuildCharacter()
     {
-        player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
-        player.GetComponent<SetupSkin>().SetMat(MatID);
-        chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
-        MultiplayerManager.MyPlayer = player;
+        if (!player)
+        {
+            player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
+            player.GetComponent<SetupSkin>().SetMat(MatID);
+            chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
+            MultiplayerManager.MyPlayer = player;
+        }
+        
 
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
     }
