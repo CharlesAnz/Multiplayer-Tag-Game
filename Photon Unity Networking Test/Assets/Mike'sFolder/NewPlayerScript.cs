@@ -153,6 +153,7 @@ public class NewPlayerScript : MonoBehaviour
 
         /* make it controllable again */
         controllable = true;
+        collider.enabled = true; //temp
 
         /* Stop the particle system */
         PlayerDeath.Stop();

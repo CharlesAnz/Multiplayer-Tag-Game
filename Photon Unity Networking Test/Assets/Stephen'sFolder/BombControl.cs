@@ -26,7 +26,7 @@ public class BombControl : MonoBehaviourPun
         if (active)
         {
             int Num = (int)(PhotonNetwork.Time - StartTime);
-            DisplayText.text = (Num + "");
+            DisplayText.text = ((20 - Num) + "");
             if (target)
             {
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
