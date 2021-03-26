@@ -30,13 +30,16 @@ public class BombControl : MonoBehaviourPun
             if (target)
             {
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
-                if (Num >= 20 && PhotonNetwork.IsMasterClient)
+            }
+            if (Num >= 20 && PhotonNetwork.IsMasterClient)
+            {
+                if (target)
                 {
                     target.GetComponent<NewPlayerScript>().IsGhost = true;
                     target.GetComponent<NewPlayerScript>().CallKillMe();
-                    StartTime += 20;
-                    FindObjectOfType<NetworkManager>().BombExploded(StartTime);
                 }
+                StartTime += 20;
+                FindObjectOfType<NetworkManager>().BombExploded(StartTime);
             }
 
             if (Time.time - delaytime >= 0.5f)
