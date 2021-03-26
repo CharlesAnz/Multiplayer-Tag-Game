@@ -101,7 +101,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
 
             //player.GetComponent<NewPlayerScript>().HasBomb = true;
-            StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
+            //StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
     }
 
@@ -164,6 +164,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
         MultiplayerManager.MyPlayer = player;
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
+        }
+
         //player.GetComponent<NewPlayerScript>().HasBeenSetup = true;
     }
 
@@ -208,7 +213,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
-        
     }
 
     public void BombExploded(double t)
