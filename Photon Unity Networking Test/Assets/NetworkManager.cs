@@ -158,13 +158,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         List<GameObject> CanGoSpawns = new List<GameObject>();
         foreach (GameObject spawn in SpawnPoints)
         {
+            bool IsClose = false;
             foreach (NewPlayerScript player in FindObjectsOfType<NewPlayerScript>())
             {
-                if (Vector3.Distance(player.gameObject.transform.position, spawn.transform.position) >= 10)
+                if (Vector3.Distance(player.gameObject.transform.position, spawn.transform.position) <= 10)
                 {
-                    CanGoSpawns.Add(spawn);
+                    IsClose = true;
                 }
             }
+            if (!IsClose) CanGoSpawns.Add(spawn);
         }
         if (CanGoSpawns.Count > 0)
         {
