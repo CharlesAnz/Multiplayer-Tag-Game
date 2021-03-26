@@ -121,7 +121,7 @@ public class NewPlayerScript : MonoBehaviour
         //renderer.enabled = false;
         foreach (Transform transform in gameObject.transform)
         {
-            if (transform.gameObject.name != "Body")
+            if (transform.gameObject.name != "Body" && transform.GetComponent<SkinnedMeshRenderer>())
             {
                 transform.GetComponent<SkinnedMeshRenderer>().enabled = false;
             }

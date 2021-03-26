@@ -30,7 +30,7 @@ public class SetupSkin : MonoBehaviourPunCallbacks
     {
         foreach (Transform transform in gameObject.transform)
         {
-            if (transform.gameObject.name != "Body")
+            if (transform.gameObject.name != "Body" && transform.GetComponent<SkinnedMeshRenderer>())
             {
                 transform.GetComponent<SkinnedMeshRenderer>().material = MatPrefabs[id];
             }
