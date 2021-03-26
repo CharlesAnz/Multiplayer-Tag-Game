@@ -211,6 +211,8 @@ public class NewPlayerScript : MonoBehaviour
         if (cheerBoost.playerNearby)
         {
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().movementSpeedBuff = true;
+            cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
+
         }
     }
 }
