@@ -117,8 +117,16 @@ public class NewPlayerScript : MonoBehaviour
         /* Disable relevant player elements */
         rigidbody.velocity = Vector3.zero;
         rigidbody.constraints = RigidbodyConstraints.FreezePosition;
-        collider.enabled = false;
+        //collider.enabled = false;
         //renderer.enabled = false;
+        foreach (NewPlayerScript item in FindObjectsOfType<NewPlayerScript>())
+        {
+            if (this != item)
+            {
+                Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), item.gameObject.GetComponent<BoxCollider>());
+            }
+        }
+
         foreach (Transform transform in gameObject.transform)
         {
             if (transform.gameObject.name != "Body" && transform.GetComponent<SkinnedMeshRenderer>())
