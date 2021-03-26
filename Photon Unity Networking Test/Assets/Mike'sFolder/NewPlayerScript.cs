@@ -175,7 +175,7 @@ public class NewPlayerScript : MonoBehaviour
     {
         HasBomb = true;
         CanGiveBomb = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         CanGiveBomb = true;
         //HasBomb = true;
     }
