@@ -25,7 +25,7 @@ public class NewPlayerScript : MonoBehaviour
     public bool HasBeenSetup = false;
     float StartTime = 0;
 
-    float speedBoostStartTime = 0;
+    float speedBoostStartTime = 0f;
 
     public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
 
@@ -51,20 +51,14 @@ public class NewPlayerScript : MonoBehaviour
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
 
-        //if (movementSpeedBuff)
-        //{
-            if (Time.time - speedBoostStartTime <= 10)
-            { 
-                //movementSpeedBuff = false;
-                MovementSpeed = 5;
-            }
-            else
-            {
-                MovementSpeed = 2;
-            }
-
-            
-        //}
+        if (Time.time - speedBoostStartTime <= 10)
+        {
+            MovementSpeed = 5;
+        }
+        else
+        {
+            MovementSpeed = 2;
+        }
 
         if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
 
@@ -218,9 +212,7 @@ public class NewPlayerScript : MonoBehaviour
 
         if (cheerBoost.playerNearby)
         {
-            //cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().movementSpeedBuff = true;
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
-
         }
     }
 }
