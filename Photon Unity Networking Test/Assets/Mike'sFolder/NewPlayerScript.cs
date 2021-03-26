@@ -65,7 +65,7 @@ public class NewPlayerScript : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    StartCoroutine("Cheer");
+                    StartCoroutine(CheerTimer());
                 }
             }
         }
@@ -147,6 +147,17 @@ public class NewPlayerScript : MonoBehaviour
         PlayerDeath.Stop();
     }
 
+    private IEnumerator CheerTimer()
+    {
+        // INPUT CHEER LOGIC HERE
+        rigidbody.velocity = Vector3.zero;
+        controllable = false;
+        //GetComponent<Animator>().SetTrigger("CheerTrig");
+        photonView.RPC("Cheer", RpcTarget.AllViaServer);
+        yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
+        controllable = true;
+    }
+
     public IEnumerator GiveBomb()
     {
         HasBomb = true;
@@ -165,14 +176,9 @@ public class NewPlayerScript : MonoBehaviour
         photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
     }
 
-    private IEnumerator Cheer()
+    [PunRPC]
+    void Cheer()
     {
-        // INPUT CHEER LOGIC HERE
-        rigidbody.velocity = Vector3.zero;
-        controllable = false;
-        GetComponent<Animator>().SetBool("IsCheering", true);
-        yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
-        GetComponent<Animator>().SetBool("IsCheering", false);
-        controllable = true;
+        GetComponent<Animator>().SetTrigger("CheerTrig");
     }
 }
