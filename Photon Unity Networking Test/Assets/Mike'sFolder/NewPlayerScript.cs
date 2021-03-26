@@ -53,7 +53,11 @@ public class NewPlayerScript : MonoBehaviour
 
         if (movementSpeedBuff)
         {
-            if (Time.time - speedBoostStartTime >= 10) movementSpeedBuff = false;
+            if (Time.time - speedBoostStartTime >= 10)
+            { 
+                movementSpeedBuff = false;
+                MovementSpeed = 2;
+            }
 
             MovementSpeed = 5;
         }
