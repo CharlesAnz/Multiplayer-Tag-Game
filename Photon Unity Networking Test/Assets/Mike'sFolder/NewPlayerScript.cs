@@ -62,23 +62,6 @@ public class NewPlayerScript : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitToBecomeGhost()
-    {
-        /* get timer from MultiplayerGameManager */
-        yield return new WaitForSeconds(MultiplayerGameManager.time_to_become_ghost);
-
-        /* Make it possible for all remote clients to become ghosts on server */
-        photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
-    }
-
-    private IEnumerator Cheer()
-    {
-        // INPUT CHEER LOGIC HERE
-        rigidbody.velocity = Vector3.zero;
-
-        yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
-    }
-
     public void OnCollisionEnter(Collision otherPlayer)
     {
         if (HasBeenSetup && photonView.IsMine)
@@ -97,15 +80,6 @@ public class NewPlayerScript : MonoBehaviour
                 }
             }
         }
-    }
-
-    public IEnumerator GiveBomb()
-    {
-        HasBomb = true;
-        CanGiveBomb = false;
-        yield return new WaitForSeconds(2);
-        CanGiveBomb = true;
-        //HasBomb = true;
     }
 
     public void CallKillMe()
@@ -170,5 +144,31 @@ public class NewPlayerScript : MonoBehaviour
                 StartCoroutine("Cheer");
             }
         }
+    }
+
+    public IEnumerator GiveBomb()
+    {
+        HasBomb = true;
+        CanGiveBomb = false;
+        yield return new WaitForSeconds(2);
+        CanGiveBomb = true;
+        //HasBomb = true;
+    }
+
+    private IEnumerator WaitToBecomeGhost()
+    {
+        /* get timer from MultiplayerGameManager */
+        yield return new WaitForSeconds(MultiplayerGameManager.time_to_become_ghost);
+
+        /* Make it possible for all remote clients to become ghosts on server */
+        photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
+    }
+
+    private IEnumerator Cheer()
+    {
+        // INPUT CHEER LOGIC HERE
+        rigidbody.velocity = Vector3.zero;
+
+        yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
     }
 }
