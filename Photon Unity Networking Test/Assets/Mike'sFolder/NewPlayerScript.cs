@@ -54,6 +54,7 @@ public class NewPlayerScript : MonoBehaviour
             if (forward != 0) GetComponent<Animator>().SetBool("IsRunning", true);
             else GetComponent<Animator>().SetBool("IsRunning", false);
             //Debug.Log("you should be moving!");
+
             // TEST DEATH CODE
             if (Input.GetKeyDown(KeyCode.T))
             {
@@ -169,9 +170,9 @@ public class NewPlayerScript : MonoBehaviour
         // INPUT CHEER LOGIC HERE
         rigidbody.velocity = Vector3.zero;
         controllable = false;
-
-
+        GetComponent<Animator>().SetBool("IsCheering", true);
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
+        GetComponent<Animator>().SetBool("IsCheering", false);
         controllable = true;
     }
 }
