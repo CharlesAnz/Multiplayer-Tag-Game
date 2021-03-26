@@ -253,6 +253,7 @@ MonoBehaviour:
   turnSpeed: 180
   controllable: 1
   PlayerDeath: {fileID: 4778593037534525262}
+  MyCam: {fileID: 0}
   HasBeenSetup: 0
   HasBomb: 1
   CanGiveBomb: 1

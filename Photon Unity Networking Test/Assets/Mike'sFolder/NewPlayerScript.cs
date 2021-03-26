@@ -18,9 +18,10 @@ public class NewPlayerScript : MonoBehaviour
     private new Collider collider;
     Animator animator;
     public ParticleSystem PlayerDeath;
+    public GameObject MyCam;
 
     public bool HasBeenSetup = false;
-    float SetupTime = 0, StartTime = 0;
+    float StartTime = 0;
 
     public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
 
@@ -34,6 +35,12 @@ public class NewPlayerScript : MonoBehaviour
 
         StartTime = Time.time;
         //gameObject.tag = photonView.Owner.ActorNumber + "";
+
+        if (photonView.IsMine)
+        {
+            //Camera.main.enabled = false;
+            //MyCam.enabled = true;
+        }
     }
 
     public void Update()
@@ -44,6 +51,8 @@ public class NewPlayerScript : MonoBehaviour
         }
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
+
+        if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
 
         if(photonView.IsMine)
         {

@@ -601,9 +601,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsRunning
-  - Type: 4
+  - Type: 9
     SynchronizeType: 0
-    Name: isCheering
+    Name: CheerTrig
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -641,6 +641,7 @@ MonoBehaviour:
   turnSpeed: 180
   controllable: 1
   PlayerDeath: {fileID: -2658349332888540627}
+  MyCam: {fileID: 0}
   HasBeenSetup: 0
   HasBomb: 0
   CanGiveBomb: 0

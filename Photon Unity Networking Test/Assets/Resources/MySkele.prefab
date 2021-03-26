@@ -881,6 +881,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsRunning
+  - Type: 9
+    SynchronizeType: 0
+    Name: CheerTrig
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -918,6 +921,11 @@ MonoBehaviour:
   turnSpeed: 180
   controllable: 1
   PlayerDeath: {fileID: 2530665485325381364}
+  MyCam: {fileID: 0}
+  HasBeenSetup: 0
+  HasBomb: 0
+  CanGiveBomb: 0
+  IsGhost: 0
 --- !u!54 &8195845538537213168
 Rigidbody:
   m_ObjectHideFlags: 0

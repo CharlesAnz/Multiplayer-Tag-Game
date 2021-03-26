@@ -28,6 +28,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject BombPrefab;
     public GameObject[] SpawnPoints;
 
+    public Camera MainCam, LocalCam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -156,6 +158,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         player = PhotonNetwork.Instantiate(transferData.MyMonsterName, GetSpawn().transform.position, Quaternion.Euler(0, 0, 0), 0);
         player.GetComponent<SetupSkin>().SetMat(MatID);
+        player.GetComponent<NewPlayerScript>().MyCam = LocalCam.gameObject;
+        MainCam.enabled = false;
+        LocalCam.enabled = true;
         chatManager.myCharacter = player.GetComponent<NewPlayerScript>();
         MultiplayerManager.MyPlayer = player;
 
