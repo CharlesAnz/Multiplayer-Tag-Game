@@ -32,6 +32,7 @@ public class BombControl : MonoBehaviourPun
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
                 if (Num == 20 && PhotonNetwork.IsMasterClient)
                 {
+                    target.GetComponent<NewPlayerScript>().IsGhost = true;
                     target.GetComponent<NewPlayerScript>().CallKillMe();
                     StartTime += 20;
                     FindObjectOfType<NetworkManager>().BombExploded(StartTime);
