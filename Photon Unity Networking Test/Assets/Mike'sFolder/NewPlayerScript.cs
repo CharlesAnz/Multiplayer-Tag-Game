@@ -34,13 +34,6 @@ public class NewPlayerScript : MonoBehaviour
         PlayerDeath = GetComponent<ParticleSystem>();
 
         StartTime = Time.time;
-        //gameObject.tag = photonView.Owner.ActorNumber + "";
-
-        if (photonView.IsMine)
-        {
-            //Camera.main.enabled = false;
-            //MyCam.enabled = true;
-        }
     }
 
     public void Update()
