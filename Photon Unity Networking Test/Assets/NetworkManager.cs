@@ -96,7 +96,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             //TheBomb.BombHolderId = PhotonNetwork.LocalPlayer.ActorNumber;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
 
-            player.GetComponent<NewPlayerScript>().HasBomb = true;
+            //player.GetComponent<NewPlayerScript>().HasBomb = true;
+            StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
     }
 
@@ -161,8 +162,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber == TargetID)
         {
-            player.GetComponent<NewPlayerScript>().HasBomb = true;
+            //player.GetComponent<NewPlayerScript>().HasBomb = true;
+            StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
         FindObjectOfType<BombControl>().BombHolderId = TargetID;
+    }
+
+    public void BombExploded(double t)
+    {
+        photonView.RPC("SetTimey", RpcTarget.AllBuffered, t, PhotonNetwork.LocalPlayer.ActorNumber);
     }
 }

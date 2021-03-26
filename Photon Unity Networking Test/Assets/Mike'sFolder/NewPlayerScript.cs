@@ -22,7 +22,7 @@ public class NewPlayerScript : MonoBehaviour
     public bool HasBeenSetup = false;
     float SetupTime = 0, StartTime = 0;
 
-    public bool HasBomb = false;
+    public bool HasBomb = false, CanGiveBomb = false;
 
     public void Awake()
     {
@@ -86,13 +86,29 @@ public class NewPlayerScript : MonoBehaviour
                 print("Collided!" + HasBomb);
                 //photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
                 int TargetId = otherPlayer.gameObject.GetComponent<PhotonView>().Owner.ActorNumber;
-                if (HasBomb)
+                if (HasBomb && CanGiveBomb)
                 {
-                    FindObjectOfType<NetworkManager>().Collided(TargetId);
+                    
                     HasBomb = false;
+                    CanGiveBomb = false;
+                    FindObjectOfType<NetworkManager>().Collided(TargetId);
                 }
             }
         }
+    }
+
+    public IEnumerator GiveBomb()
+    {
+        HasBomb = true;
+        CanGiveBomb = false;
+        yield return new WaitForSeconds(2);
+        CanGiveBomb = true;
+        //HasBomb = true;
+    }
+
+    public void CallKillMe()
+    {
+        photonView.RPC("KillPlayer", RpcTarget.AllViaServer);
     }
 
     [PunRPC]
