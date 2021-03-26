@@ -9,6 +9,7 @@ public class NewPlayerScript : MonoBehaviour
     public float MovementSpeed = 2;
     public float turnSpeed = 180;
     public bool controllable = true;
+    public bool movementSpeedBuff = false;
 
     /* PhotonView component */
     private PhotonView photonView;
@@ -19,10 +20,12 @@ public class NewPlayerScript : MonoBehaviour
     Animator animator;
     public ParticleSystem PlayerDeath;
     public GameObject MyCam;
-    private BombCollisionTrigger bombCollisionTrigger;
+    private CheerBoostTrigger cheerBoost;
 
     public bool HasBeenSetup = false;
     float StartTime = 0;
+
+    float speedBoostStartTime = 0;
 
     public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
 
@@ -34,7 +37,7 @@ public class NewPlayerScript : MonoBehaviour
         collider = GetComponent<Collider>();
         PlayerDeath = GetComponent<ParticleSystem>();
 
-        bombCollisionTrigger = GetComponentInChildren<BombCollisionTrigger>();
+        cheerBoost = GetComponentInChildren<CheerBoostTrigger>();
 
         StartTime = Time.time;
     }
@@ -47,6 +50,13 @@ public class NewPlayerScript : MonoBehaviour
         }
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
+
+        if (movementSpeedBuff)
+        {
+            if (Time.time - speedBoostStartTime >= 10) movementSpeedBuff = false;
+
+            MovementSpeed = 20;
+        }
 
         if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
 
@@ -74,17 +84,13 @@ public class NewPlayerScript : MonoBehaviour
                 }
             }
 
-            if (bombCollisionTrigger.collidedWithPlayer)
-            {
-                Collided(bombCollisionTrigger.otherPlayer);
-            }
-
-
         }
     }
 
-   
-    public void Collided(GameObject otherPlayer)
+
+
+
+    public void OnCollisionEnter(Collision otherPlayer)
     {
         if (HasBeenSetup && photonView.IsMine)
         {
@@ -98,9 +104,6 @@ public class NewPlayerScript : MonoBehaviour
                 FindObjectOfType<NetworkManager>().Collided(TargetId);
             }
         }
-
-        bombCollisionTrigger.otherPlayer = null;
-        bombCollisionTrigger.collidedWithPlayer = false;
     }
 
 
@@ -197,9 +200,16 @@ public class NewPlayerScript : MonoBehaviour
         photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
     }
 
+
+
     [PunRPC]
     void Cheer()
     {
         GetComponent<Animator>().SetTrigger("CheerTrig");
+
+        if (cheerBoost.playerNearby)
+        {
+            cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().movementSpeedBuff = true;
+        }
     }
 }

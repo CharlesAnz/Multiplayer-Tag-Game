@@ -253,6 +253,7 @@ MonoBehaviour:
   MovementSpeed: 2
   turnSpeed: 180
   controllable: 1
+  movementSpeedBuff: 0
   PlayerDeath: {fileID: 4778593037534525262}
   MyCam: {fileID: 0}
   HasBeenSetup: 0
@@ -5463,6 +5464,7 @@ GameObject:
   - component: {fileID: 2727433775718449214}
   - component: {fileID: 279083059956183624}
   - component: {fileID: 4018850108379114778}
+  - component: {fileID: 8255892830105167101}
   m_Layer: 0
   m_Name: BombCollider
   m_TagString: Untagged
@@ -5495,9 +5497,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8210449, y: 0.872036, z: 1.8893738}
-  m_Center: {x: -0.035095215, y: -0.06398201, z: 0.038009644}
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &4018850108379114778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626571767890388697}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a668ecfc5ab3414e94b119f94ef50c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collidedWithPlayer: 0
+  otherPlayer: {fileID: 0}
+--- !u!114 &8255892830105167101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5506,8 +5522,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7626571767890388697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a668ecfc5ab3414e94b119f94ef50c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b3b504dce87b044b86b60f01cf84fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidedWithPlayer: 0
+  playerNearby: 0
   otherPlayer: {fileID: 0}
