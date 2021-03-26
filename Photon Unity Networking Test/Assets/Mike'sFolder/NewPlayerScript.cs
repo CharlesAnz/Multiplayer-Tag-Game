@@ -55,7 +55,7 @@ public class NewPlayerScript : MonoBehaviour
         {
             if (Time.time - speedBoostStartTime >= 10) movementSpeedBuff = false;
 
-            MovementSpeed = 20;
+            MovementSpeed = 5;
         }
 
         if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
