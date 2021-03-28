@@ -45,15 +45,18 @@ public class NewPlayerScript : MonoBehaviour
 
     public void Update()
     {
-        if (SpeedFx == true)
+
+        if (Time.time - speedBoostStartTime <= 10)
         {
             var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
             speedBoostScript.enabled = true;
+            MovementSpeed = 5;
         }
         else
         {
             var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
             speedBoostScript.enabled = false;
+            MovementSpeed = 2;
         }
 
         if (!photonView.IsMine || !controllable)
@@ -63,14 +66,7 @@ public class NewPlayerScript : MonoBehaviour
 
         if (Time.time - StartTime >= 10) HasBeenSetup = true;
 
-        if (Time.time - speedBoostStartTime <= 10)
-        {
-            MovementSpeed = 5;
-        }
-        else
-        {
-            MovementSpeed = 2;
-        }
+        
 
         if (MyCam) MyCam.transform.position = gameObject.transform.position + new Vector3(0, 10, -8);
 
