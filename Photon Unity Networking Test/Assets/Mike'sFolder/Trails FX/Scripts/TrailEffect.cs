@@ -562,9 +562,9 @@ namespace TrailsFX {
                 case TrailStyle.Clone:
                     Material origMat = theRenderer.sharedMaterial;
                     if (origMat != null) {
-                        trailMat.mainTexture = origMat.mainTexture;
-                        trailMat.mainTextureScale = origMat.mainTextureScale;
-                        trailMat.mainTextureOffset = origMat.mainTextureOffset;
+                        //trailMat.mainTexture = origMat.mainTexture;
+                        //trailMat.mainTextureScale = origMat.mainTextureScale;
+                        //trailMat.mainTextureOffset = origMat.mainTextureOffset;
                         trailMat.SetFloat("_CutOff", textureCutOff);
                         if (textureCutOff > 0) {
                             trailMat.EnableKeyword(SKW_ALPHACLIP);

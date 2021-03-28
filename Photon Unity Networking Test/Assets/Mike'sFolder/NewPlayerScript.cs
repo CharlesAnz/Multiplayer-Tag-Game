@@ -28,7 +28,7 @@ public class NewPlayerScript : MonoBehaviour
 
     float speedBoostStartTime = 0f;
 
-    public bool HasBomb = false, CanGiveBomb = false, IsGhost = false, SpeedFx = false;
+    public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
 
     public void Awake()
     {
@@ -188,7 +188,6 @@ public class NewPlayerScript : MonoBehaviour
         photonView.RPC("Cheer", RpcTarget.AllViaServer);
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
         controllable = true;
-        SpeedFx = false;
     }
 
     public IEnumerator GiveBomb()
@@ -217,7 +216,6 @@ public class NewPlayerScript : MonoBehaviour
         if (cheerBoost.playerNearby)
         {
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
-            cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().SpeedFx = true;
         }
     }
 }
