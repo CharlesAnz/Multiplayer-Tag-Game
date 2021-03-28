@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TrailsFX;
 
 public class NewPlayerScript : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class NewPlayerScript : MonoBehaviour
 
     float speedBoostStartTime = 0f;
 
-    public bool HasBomb = false, CanGiveBomb = false, IsGhost = false;
+    public bool HasBomb = false, CanGiveBomb = false, IsGhost = false, SpeedFx = false;
 
     public void Awake()
     {
@@ -42,6 +43,7 @@ public class NewPlayerScript : MonoBehaviour
         StartTime = Time.time;
     }
 
+    [PunRPC]
     public void Update()
     {
         if (!photonView.IsMine || !controllable)
@@ -72,6 +74,17 @@ public class NewPlayerScript : MonoBehaviour
             else GetComponent<Animator>().SetBool("IsRunning", false);
             //Debug.Log("you should be moving!");
 
+            if (SpeedFx == true)
+            {
+                var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
+                speedBoostScript.enabled = true;
+            }
+            else
+            {
+                var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
+                speedBoostScript.enabled = false;
+            }
+
             // TEST DEATH CODE
             if (Input.GetKeyDown(KeyCode.T))
             {
@@ -85,7 +98,6 @@ public class NewPlayerScript : MonoBehaviour
                     StartCoroutine(CheerTimer());
                 }
             }
-
         }
     }
 
@@ -169,20 +181,19 @@ public class NewPlayerScript : MonoBehaviour
         controllable = true;
         //collider.enabled = true; //temp
         
-
         /* Stop the particle system */
         PlayerDeath.Stop();
     }
 
     private IEnumerator CheerTimer()
     {
-        // INPUT CHEER LOGIC HERE
         rigidbody.velocity = Vector3.zero;
         controllable = false;
         //GetComponent<Animator>().SetTrigger("CheerTrig");
         photonView.RPC("Cheer", RpcTarget.AllViaServer);
         yield return new WaitForSeconds(MultiplayerGameManager.cheer_timer);
         controllable = true;
+        SpeedFx = false;
     }
 
     public IEnumerator GiveBomb()
@@ -203,8 +214,6 @@ public class NewPlayerScript : MonoBehaviour
         photonView.RPC("BecomeGhost", RpcTarget.AllViaServer);
     }
 
-
-
     [PunRPC]
     void Cheer()
     {
@@ -213,6 +222,7 @@ public class NewPlayerScript : MonoBehaviour
         if (cheerBoost.playerNearby)
         {
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
+            cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().SpeedFx = true;
         }
     }
 }
