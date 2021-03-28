@@ -43,9 +43,19 @@ public class NewPlayerScript : MonoBehaviour
         StartTime = Time.time;
     }
 
-    [PunRPC]
     public void Update()
     {
+        if (SpeedFx == true)
+        {
+            var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
+            speedBoostScript.enabled = true;
+        }
+        else
+        {
+            var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
+            speedBoostScript.enabled = false;
+        }
+
         if (!photonView.IsMine || !controllable)
         {
             return;
@@ -73,17 +83,6 @@ public class NewPlayerScript : MonoBehaviour
             if (forward != 0) GetComponent<Animator>().SetBool("IsRunning", true);
             else GetComponent<Animator>().SetBool("IsRunning", false);
             //Debug.Log("you should be moving!");
-
-            if (SpeedFx == true)
-            {
-                var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
-                speedBoostScript.enabled = true;
-            }
-            else
-            {
-                var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
-                speedBoostScript.enabled = false;
-            }
 
             // TEST DEATH CODE
             if (Input.GetKeyDown(KeyCode.T))
