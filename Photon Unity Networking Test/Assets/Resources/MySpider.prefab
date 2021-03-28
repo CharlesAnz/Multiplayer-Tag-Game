@@ -925,7 +925,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2871914618795776866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
   m_Name: 
@@ -937,7 +937,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: IsRunning
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: CheerTrig
   m_SynchronizeLayers:
   - SynchronizeType: 0
@@ -981,6 +981,7 @@ MonoBehaviour:
   HasBomb: 0
   CanGiveBomb: 0
   IsGhost: 0
+  SpeedFx: 0
 --- !u!54 &-8754536078088803639
 Rigidbody:
   m_ObjectHideFlags: 0
