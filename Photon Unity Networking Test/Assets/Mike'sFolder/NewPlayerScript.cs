@@ -59,7 +59,8 @@ public class NewPlayerScript : MonoBehaviour
         {
             var speedBoostScript = GetComponentInChildren<TrailsFX.TrailEffect>();
             speedBoostScript.enabled = false;
-            MovementSpeed = 2;
+            if (HasBomb) MovementSpeed = 2.5f;
+            else MovementSpeed = 2;
         }
 
         if (!photonView.IsMine || !controllable)

@@ -84,8 +84,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Yep, you managed to join a room!");
-        status.text = "Yep, you managed to join a room!";
+        Debug.Log("Room joined!");
+        status.text = "Room joined!";
         buttonPlay.gameObject.SetActive(false);
         playerName.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(true);
@@ -121,12 +121,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        status.text = newPlayer.NickName + " has just entered.";
+        status.text = newPlayer.NickName + " just entered.";
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        status.text = otherPlayer.NickName + " has just left.";
+        status.text = otherPlayer.NickName + " just left.";
     }
 
     // Update is called once per frame
@@ -135,14 +135,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.InRoom)
         {
             nickname.text = "Hello, " + PhotonNetwork.NickName;
-            room.text = "Room: " + PhotonNetwork.CurrentRoom.Name;
+            room.text = "Room: " + PhotonNetwork.CurrentRoom.Name.Substring(0, 5);
             players.text = "Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " of " + PhotonNetwork.CurrentRoom.MaxPlayers;
 
             players.text += ":\n";
-            Dictionary<int, Player> mydict = PhotonNetwork.CurrentRoom.Players;
-            int i = 1;
-            foreach (var item in mydict)
-                players.text += string.Format("{0,2}. {1}\n", (i++), item.Value.NickName);
+            //Dictionary<int, Player> mydict = PhotonNetwork.CurrentRoom.Players;
+            //int i = 1;
+            //foreach (var item in mydict)
+            //    players.text += string.Format("{0,2}. {1}\n", (i++), item.Value.NickName);
+
+            foreach (NewPlayerScript playerScript in FindObjectsOfType<NewPlayerScript>())
+            {
+                players.text += playerScript.GetComponent<PhotonView>().Owner.NickName;
+                if (playerScript.IsGhost) players.text += " - Dead";
+                else players.text += " - Alive";
+                players.text += "\n";
+            }
         }
         else if (PhotonNetwork.IsConnected)
         {
