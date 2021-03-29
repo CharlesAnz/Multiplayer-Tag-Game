@@ -155,6 +155,8 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
                 OutputMonsterText.text = "Spider"; break;
             case 3:
                 OutputMonsterText.text = "Skeleton"; break;
+            case 4:
+                OutputMonsterText.text = "Plant"; break;
             default:
                 break;
         }
