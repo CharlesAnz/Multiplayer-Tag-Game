@@ -29,6 +29,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject[] SpawnPoints;
 
     public Camera MainCam, LocalCam;
+    public GameObject WinnerPanel;
+    public float GameEndTime = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -150,12 +152,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             //foreach (var item in mydict)
             //    players.text += string.Format("{0,2}. {1}\n", (i++), item.Value.NickName);
 
+            int numofalive = 0, numofdead = 0;
+            string Winner = "";
             foreach (NewPlayerScript playerScript in FindObjectsOfType<NewPlayerScript>())
             {
                 players.text += playerScript.GetComponent<PhotonView>().Owner.NickName;
-                if (playerScript.IsGhost) players.text += " - Dead";
-                else players.text += " - Alive";
+                if (playerScript.IsGhost)
+                {
+                    players.text += " - Dead";
+                    numofdead++;
+                }
+                else
+                {
+                    players.text += " - Alive";
+                    numofalive++;
+                    Winner = playerScript.GetComponent<PhotonView>().Owner.NickName;
+                }
                 players.text += "\n";
+            }
+            if (numofalive == 1 && numofdead > 0)
+            {
+                photonView.RPC("GameEnd", RpcTarget.AllBufferedViaServer, Winner);
+            }
+
+            if (GameEndTime > 0 && Time.time - GameEndTime >= 5)
+            {
+                Leave();
             }
         }
         else if (PhotonNetwork.IsConnected)
@@ -227,6 +249,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
+    }
+
+    [PunRPC]
+    void GameEnd(string Winner)
+    {
+        WinnerPanel.SetActive(true);
+        WinnerPanel.transform.Find("Text").GetComponent<Text>().text = Winner + " has won!";
+        GameEndTime = Time.time;
     }
 
     public void BombExploded(double t)
