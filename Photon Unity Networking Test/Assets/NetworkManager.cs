@@ -71,6 +71,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void Leave()
     {
+        Destroy(transferData.gameObject);
         PhotonNetwork.LeaveRoom();
         OnLeftRoom();
     }
