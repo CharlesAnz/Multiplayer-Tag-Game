@@ -170,7 +170,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 }
                 players.text += "\n";
             }
-            if (numofalive == 1 && numofdead > 0)
+            if (numofalive == 1 && numofdead > 0 && GameEndTime <= 0f)
             {
                 photonView.RPC("GameEnd", RpcTarget.AllBufferedViaServer, Winner);
             }
