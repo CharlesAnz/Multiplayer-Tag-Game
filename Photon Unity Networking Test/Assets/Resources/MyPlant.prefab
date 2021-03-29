@@ -624,7 +624,7 @@ MonoBehaviour:
   controllable: 1
   PlayerDeath: {fileID: -7095202232164926085}
   MyCam: {fileID: 0}
-  audioSource: {fileID: 8651853360794418467, guid: d5767ea1f69b0ce4490ed8f9eac92b9e, type: 3}
+  audioSource: {fileID: -8614640712872843979}
   cheerSound: {fileID: 8300000, guid: 17afbcc5c5d1c264399eb4aabba54cda, type: 3}
   explosionSound: {fileID: 8300000, guid: 7cce33e16e97302468447565611f620d, type: 3}
   HasBeenSetup: 0
