@@ -7,7 +7,7 @@ using Photon.Pun;
 public class MultiplayerGameManager : MonoBehaviourPun
 {
     public const float time_to_become_ghost = 4.0f;
-    public const float cheer_timer = 4.0f;
+    public const float cheer_timer = 3.0f;
 
     public bool GameStarted = false;
     public float StartTime = 0f;
