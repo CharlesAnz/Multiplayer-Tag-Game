@@ -132,8 +132,8 @@ public class NewPlayerScript : MonoBehaviour
         IsGhost = true;
 
         /* Disable relevant player elements */
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        //rigidbody.velocity = Vector3.zero;
+        //rigidbody.constraints = RigidbodyConstraints.FreezePosition;
         //collider.enabled = false;
         //renderer.enabled = false;
         foreach (NewPlayerScript item in FindObjectsOfType<NewPlayerScript>())

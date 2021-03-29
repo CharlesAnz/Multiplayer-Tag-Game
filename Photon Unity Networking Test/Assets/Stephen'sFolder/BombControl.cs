@@ -38,7 +38,7 @@ public class BombControl : MonoBehaviourPun
                     target.GetComponent<NewPlayerScript>().IsGhost = true;
                     target.GetComponent<NewPlayerScript>().CallKillMe();
                 }
-                StartTime += 20;
+                StartTime += 40;
                 FindObjectOfType<NetworkManager>().BombExploded(StartTime);
             }
 
