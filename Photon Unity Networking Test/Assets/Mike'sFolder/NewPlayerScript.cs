@@ -22,6 +22,9 @@ public class NewPlayerScript : MonoBehaviour
     public ParticleSystem PlayerDeath;
     public GameObject MyCam;
     private CheerBoostTrigger cheerBoost;
+    public AudioSource audioSource;
+    public AudioClip cheerSound;
+    public AudioClip explosionSound;
 
     public bool HasBeenSetup = false;
     float StartTime = 0;
@@ -125,6 +128,7 @@ public class NewPlayerScript : MonoBehaviour
     [PunRPC]
     public void KillPlayer()
     {
+        audioSource.PlayOneShot(explosionSound);
         IsGhost = true;
 
         /* Disable relevant player elements */
@@ -212,7 +216,7 @@ public class NewPlayerScript : MonoBehaviour
     void Cheer()
     {
         GetComponent<Animator>().SetTrigger("CheerTrig");
-
+        audioSource.PlayOneShot(cheerSound);
         if (cheerBoost.playerNearby)
         {
             cheerBoost.otherPlayer.GetComponent<NewPlayerScript>().speedBoostStartTime = Time.time;
