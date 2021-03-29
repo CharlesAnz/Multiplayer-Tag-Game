@@ -27,5 +27,14 @@ public class MultiplayerGameManager : MonoBehaviourPun
         
     }
 
-    
+    [PunRPC]
+    public void BackgroundMusic()
+    {
+        AudioSource audioRPC = gameObject.AddComponent<AudioSource>();
+        audioRPC.clip = backgroundTrack;
+        audioRPC.spatialBlend = 1;
+        audioRPC.minDistance = 25;
+        audioRPC.maxDistance = 100;
+        audioRPC.Play();
+    }
 }
