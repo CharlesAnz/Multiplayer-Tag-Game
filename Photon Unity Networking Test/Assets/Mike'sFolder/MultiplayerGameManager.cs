@@ -14,6 +14,8 @@ public class MultiplayerGameManager : MonoBehaviourPun
     public GameObject BombPrefab;
     public GameObject TheBomb;
     public GameObject MyPlayer;
+    public AudioSource audioSource;
+    public AudioClip backgroundTrack;
 
     public void Start()
     {
