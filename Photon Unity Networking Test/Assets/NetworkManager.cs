@@ -72,6 +72,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void Leave()
     {
         PhotonNetwork.LeaveRoom();
+        OnLeftRoom();
+    }
+    public void OnLeftRoom()
+    {
+        PhotonNetwork.LoadLevel(0);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
