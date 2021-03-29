@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class SetupSkin : MonoBehaviourPunCallbacks
 {
     public Material[] MatPrefabs;
+    public Material GhostMat;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,17 @@ public class SetupSkin : MonoBehaviourPunCallbacks
     public void SetMat(int id)
     {
         photonView.RPC("SetMaterial", RpcTarget.AllBuffered, id);
+    }
+
+    public void TurnGhost()
+    {
+        foreach (Transform transform in gameObject.transform)
+        {
+            if (transform.gameObject.name != "Body" && transform.GetComponent<SkinnedMeshRenderer>())
+            {
+                transform.GetComponent<SkinnedMeshRenderer>().material = GhostMat;
+            }
+        }
     }
 
     [PunRPC]

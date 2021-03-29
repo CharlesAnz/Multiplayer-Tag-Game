@@ -183,6 +183,9 @@ public class NewPlayerScript : MonoBehaviour
         
         /* Stop the particle system */
         PlayerDeath.Stop();
+
+        //ghost mat
+        GetComponent<SetupSkin>().TurnGhost();
     }
 
     private IEnumerator CheerTimer()
