@@ -341,6 +341,7 @@ MonoBehaviour:
   - {fileID: 2044060229148331367, guid: 6727bffab9107804dbce01b523c0807c, type: 3}
   - {fileID: 4782450772225641401, guid: a53abafd0f48b154db0cc36933f2958f, type: 3}
   - {fileID: 6105123681576226648, guid: 6eaf987be8625e44bbb9fa7c8d1de524, type: 3}
+  - {fileID: 6134148875223403055, guid: 56b27b61fdd48f444a31e80698886178, type: 3}
   MaterialPrefabs:
   - {fileID: 2100000, guid: 8d06ef433d7c35546890f0502b45353b, type: 2}
   - {fileID: 2100000, guid: 797934232287e6b429183d99cbae3ced, type: 2}
