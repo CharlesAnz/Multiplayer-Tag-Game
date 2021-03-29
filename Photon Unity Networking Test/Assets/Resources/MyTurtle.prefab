@@ -828,8 +828,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.1193717, z: 1.2863399}
-  m_Center: {x: 0, y: 1.0296859, z: -0.06816989}
+  m_Size: {x: 1.5661576, y: 1.4856124, z: 1.6440446}
+  m_Center: {x: -0.020582438, y: 0.7128062, z: -0.015434623}
 --- !u!199 &-4424836048501868697
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -6352,10 +6352,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7589712709384275300}
   - component: {fileID: 5514567049733011204}
-  - component: {fileID: 6948709793736284913}
   - component: {fileID: 3637841900985628168}
   m_Layer: 0
-  m_Name: BombCollider
+  m_Name: Cheer Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6388,20 +6387,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &6948709793736284913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236814987797215710}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a668ecfc5ab3414e94b119f94ef50c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collidedWithPlayer: 0
-  otherPlayer: {fileID: 0}
 --- !u!114 &3637841900985628168
 MonoBehaviour:
   m_ObjectHideFlags: 0
