@@ -128,6 +128,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void SetTimey(double TimeLeft, int target)
     {
         FindObjectOfType<BombControl>().settime(TimeLeft, target);
+        status.text = PhotonNetwork.CurrentRoom.GetPlayer(target).NickName + " has the bomb!";
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
@@ -252,6 +253,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
+        
     }
 
     [PunRPC]
