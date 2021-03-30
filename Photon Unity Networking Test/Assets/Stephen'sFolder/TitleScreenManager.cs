@@ -110,7 +110,7 @@ public class TitleScreenManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < Rooms.Count; i++)
         {
             RoomInfo room = Rooms[i];
-            if (room.PlayerCount > 0 && room.PlayerCount < room.MaxPlayers)
+            if (room.PlayerCount > 0 && room.PlayerCount < room.MaxPlayers && room.IsOpen)
             {
                 Output += room.Name + ":" + room.PlayerCount + "\n";
                 LobbyUIS[i].transform.Find("Text").GetComponent<Text>().text = room.Name.Substring(0, 5) + ": " + room.PlayerCount + "/" + room.MaxPlayers;

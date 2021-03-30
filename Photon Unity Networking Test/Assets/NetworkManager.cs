@@ -15,7 +15,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [SerializeField]
     public InputField playerName;
     [SerializeField]
-    private byte maxPlayersPerRoom = 4;
+    private byte maxPlayersPerRoom = 20;
 
     public GameObject player = null;
 
@@ -51,7 +51,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         transferData = FindObjectOfType<TransferData>();
         PhotonNetwork.NickName = transferData.PlayerName;
         if (transferData.JoinRoomID != "New Room") PhotonNetwork.JoinRoom(transferData.JoinRoomID);
-        else PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 5, PublishUserId = true });
+        else PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 20, PublishUserId = true });
         MatID = transferData.MaterialID;
     }
 
@@ -112,6 +112,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             double time = PhotonNetwork.Time;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
             StartButtonMaster.SetActive(false);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 
