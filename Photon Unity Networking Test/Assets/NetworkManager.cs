@@ -253,7 +253,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
         }
-        
+        status.text = PhotonNetwork.CurrentRoom.GetPlayer(TargetID).NickName + " has the bomb!";
     }
 
     [PunRPC]
