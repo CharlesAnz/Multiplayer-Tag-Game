@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BombControl : MonoBehaviourPun
 {
+    public const float bomb_timer = 30.0f;
     public double StartTime = 0.0;
     bool active = false;
     public GameObject target;
@@ -26,19 +27,19 @@ public class BombControl : MonoBehaviourPun
         if (active)
         {
             int Num = (int)(PhotonNetwork.Time - StartTime);
-            DisplayText.text = ((40 - Num) + "");
+            DisplayText.text = ((bomb_timer - Num) + "");
             if (target)
             {
                 gameObject.transform.position = target.transform.position + new Vector3(0, 3, 0);
             }
-            if (Num >= 40 && PhotonNetwork.IsMasterClient)
+            if (Num >= bomb_timer && PhotonNetwork.IsMasterClient)
             {
                 if (target)
                 {
                     target.GetComponent<NewPlayerScript>().IsGhost = true;
                     target.GetComponent<NewPlayerScript>().CallKillMe();
                 }
-                StartTime += 40;
+                StartTime += bomb_timer;
                 FindObjectOfType<NetworkManager>().BombExploded(StartTime);
             }
 
@@ -50,10 +51,7 @@ public class BombControl : MonoBehaviourPun
                     {
                         target = item.gameObject;
                     }
-                    //print(item.GetComponent<PhotonView>().Owner.ActorNumber);
                 }
-                //print("/////////");
-
                 delaytime = Time.time;
             }
         }

@@ -27,10 +27,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public GameObject BombPrefab;
     public GameObject[] SpawnPoints;
+    public GameObject StartButtonMaster;
 
     public Camera MainCam, LocalCam;
     public GameObject WinnerPanel;
     public float GameEndTime = 0f;
+    public bool GameStarted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -97,19 +99,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         buttonPlay.gameObject.SetActive(false);
         playerName.gameObject.SetActive(false);
         buttonLeave.gameObject.SetActive(true);
-        //PhotonNetwork.Instantiate(player.name, new Vector3(Random.Range(-15, 15), 1, Random.Range(-15, 15)), Quaternion.Euler(0, Random.Range(-180, 180), 0), 0);
         chatManager.Connect(transferData.PlayerName);
         
         StartCoroutine(BuildTimer());
-        BombControl TheBomb = FindObjectOfType<BombControl>(); //Instantiate(BombPrefab);
+        if (PhotonNetwork.IsMasterClient) StartButtonMaster.SetActive(true);
+    }
+
+    public void StartGameMaster()
+    {
         if (PhotonNetwork.IsMasterClient)
         {
-            
             double time = PhotonNetwork.Time;
             photonView.RPC("SetTimey", RpcTarget.AllBuffered, time, PhotonNetwork.LocalPlayer.ActorNumber);
-
-            //player.GetComponent<NewPlayerScript>().HasBomb = true;
-            //StartCoroutine(player.GetComponent<NewPlayerScript>().GiveBomb());
+            StartButtonMaster.SetActive(false);
         }
     }
 
