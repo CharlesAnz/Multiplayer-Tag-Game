@@ -178,7 +178,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 photonView.RPC("GameEnd", RpcTarget.AllBufferedViaServer, Winner);
             }
 
-            if (GameEndTime > 0 && Time.time - GameEndTime >= 5)
+            if (GameEndTime > 0 && Time.time - GameEndTime >= 10f)
             {
                 Leave();
             }
